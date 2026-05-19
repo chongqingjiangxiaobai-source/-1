@@ -3,56 +3,56 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>仓库添加</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-  <script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
-  <script type="text/javascript" src="layer/layer.js" ></script>
-  <script>
-  </script>
+  <title>添加货物</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/page.css" />
+  <script src="js/jquery-3.2.1.js"></script>
+  <script src="layer/layer.js"></script>
 </head>
-<body>
-<!-- 路径导航 -->
-<ol class="breadcrumb">
-  <li><a href="">仓库添加</a></li>
-</ol>
-<!-- 面板 -->
-<div class="panel panel-primary">
-  <div class="panel-heading">仓库添加</div>
-  <div class="panel-body">
-    <form action="addGoodsServlet" class="form-horizontal">
-      <input value="${sessionScope.u.id}" name="uid" type="hidden">
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">货物ID</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="id" placeholder="货物ID">
-        </div>
-      </div>
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">货物名称</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="name" placeholder="货物名称">
-        </div>
-      </div>
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">货物数量</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="num" placeholder="货物数量">
-        </div>
-      </div>
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">生产地址</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="site" placeholder="生产地址">
-        </div>
-      </div>
+<body class="content-body">
 
-      <div class="form-group">
-        <div class="col-sm-3 col-md-4 col-sm-offset-4">
-          <button id="btn" type="submit" class="btn btn-primary btn-block">确认添加</button>
-        </div>
-      </div>
-    </form>
+<div class="page-header-bar">
+  <div class="breadcrumb-bar">
+    <a href="home_page.jsp">首页</a> <span>›</span>
+    <a href="goods_list.jsp">仓库列表</a> <span>›</span> 添加货物
   </div>
 </div>
+
+<div class="form-panel">
+  <div class="form-title">➕ 添加货物信息</div>
+  <form action="addGoodsServlet" target="_parent">
+    <input value="${sessionScope.u.id}" name="uid" type="hidden">
+    <div class="form-row">
+      <label>货物 ID</label>
+      <input type="number" class="input-field" name="id" required placeholder="输入货物编号" />
+    </div>
+    <div class="form-row">
+      <label>货物名称</label>
+      <input type="text" class="input-field" name="name" required placeholder="输入货物名称" />
+    </div>
+    <div class="form-row">
+      <label>货物数量</label>
+      <input type="number" class="input-field" name="num" required placeholder="输入库存数量" />
+    </div>
+    <div class="form-row">
+      <label>存放地点</label>
+      <input type="text" class="input-field" name="site" required placeholder="输入存放位置" />
+    </div>
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button type="submit" class="btn-primary" style="height:40px;padding:0 32px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+        ✅ 确认添加
+      </button>
+      <a href="goods_list.jsp" class="btn-default" style="height:40px;padding:0 24px;display:inline-flex;align-items:center;text-decoration:none;">
+        ← 返回列表
+      </a>
+    </div>
+  </form>
+</div>
+
+<script>
+if (window !== window.top) {
+  document.querySelector('form').target = '_parent';
+}
+</script>
 </body>
 </html>

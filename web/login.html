@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>仓库管理系统 - 登录</title>
-    <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <script src="js/xhr.js"></script>
-    <script src="js/login.js"></script>
+  <meta charset="UTF-8">
+  <title>仓库管理系统 - 登录</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/login.css" />
 </head>
-<body>
-    <canvas id="gravity-canvas"></canvas>
+<body class="login-body">
+  <canvas id="gravity-canvas"></canvas>
 
-    <div class="wrap animated bounceInLeft">
-        <h1>仓库管理系统</h1>
-        <div class="login">
-            <h3>管理员登录</h3>
-            <div class="title-line"></div>
-            <div class="logo">
-                <img src="img/location.png" />
-            </div>
-            <div class="login-form">
-                <form onsubmit="return false;">
-                    <div class="input-gorup">
-                        <span class="icon icon-user"></span>
-                        <input type="text" name="username" class="input-txt" placeholder="请输入账号名称" />
-                    </div>
-                    <div class="input-gorup">
-                        <span class="icon icon-pwd">&nbsp;&nbsp;</span>
-                        <input type="password" name="password" class="input-txt" placeholder="请输入密码" />
-                    </div>
+  <div class="login-wrapper">
+    <div class="login-card animated bounceInDown">
+      <div class="logo-area">
+        <img src="img/location.png" alt="logo" />
+        <h2>仓库管理系统</h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:11px;margin-top:2px;">枣庄学院</p>
+      </div>
 
-                    <span id="err-login"></span>
-
-                    <input class="btn-login" value="登录" type="button" onclick="mylogin()">
-                </form>
-                <div class="account-link">
-                    <a href="">忘记密码?</a>
-                    <a href="reg.html">没有帐号?注册一个</a>
-                </div>
-                <p class="copyright">&copy;By 枣庄学院</p>
-            </div>
+      <form onsubmit="return false;">
+        <div class="form-item">
+          <span class="icon">👤</span>
+          <input type="text" name="username" class="input-txt" placeholder="请输入账号" id="username" />
         </div>
-    </div>
+        <div class="form-item">
+          <span class="icon">🔒</span>
+          <input type="password" name="password" class="input-txt" placeholder="请输入密码" id="password" />
+        </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-    <script src="js/antigravity.js"></script>
+        <span id="err-login"></span>
+
+        <button class="btn-login" type="button" onclick="mylogin()">登 录</button>
+      </form>
+
+      <div class="account-link">
+        <a href="#">忘记密码</a>
+        <a href="reg.html">注册账号</a>
+      </div>
+      <p class="copyright">© 2026 枣庄学院 Warehouse Management System</p>
+    </div>
+  </div>
+
+  <script src="js/xhr.js"></script>
+  <script src="js/login.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <script src="js/antigravity.js"></script>
 </body>
 </html>

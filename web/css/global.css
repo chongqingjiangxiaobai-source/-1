@@ -1,0 +1,518 @@
+/* ============================================
+   仓库管理系统 - 统一主题样式
+   主色: #0CE093 (绿) | 深色侧边: #1B2A3B | 背景: #F0F4F8
+   ============================================ */
+
+/* ---------- 全局重置 ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+a { text-decoration: none; color: inherit; }
+
+/* ---------- 登录页专属背景 ---------- */
+body.login-body {
+  background: linear-gradient(135deg, #0a1a12 0%, #0d2b1a 40%, #0a1a12 100%);
+  min-height: 100vh;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 背景光效 */
+body.login-body::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: -20%;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(12, 224, 147, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+body.login-body::after {
+  content: '';
+  position: fixed;
+  bottom: -30%;
+  right: -20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(12, 180, 130, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbFloat 10s ease-in-out infinite reverse;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 20px); }
+}
+
+/* ---------- 登录页主体 ---------- */
+.login-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 380px;
+  margin: 60px auto 0;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 36px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.login-card .logo-area {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.login-card .logo-area img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(12, 224, 147, 0.3);
+}
+.login-card .logo-area h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 12px;
+  letter-spacing: 2px;
+}
+.login-card .logo-area p {
+  color: rgba(255,255,255,0.4);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* 输入框组 */
+.login-card .form-item {
+  margin-bottom: 18px;
+  position: relative;
+}
+.login-card .form-item .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.4);
+  font-size: 16px;
+}
+.login-card .form-item .input-txt {
+  width: 100%;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 0 16px 0 44px;
+  color: #fff;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.login-card .form-item .input-txt::placeholder { color: rgba(255,255,255,0.3); }
+.login-card .form-item .input-txt:focus {
+  outline: none;
+  border-color: #0CE093;
+  box-shadow: 0 0 0 3px rgba(12, 224, 147, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.login-card #err-login {
+  display: block;
+  color: #ff6b6b;
+  font-size: 12px;
+  text-align: center;
+  height: 18px;
+  margin-bottom: 4px;
+}
+
+/* 登录按钮 */
+.login-card .btn-login {
+  width: 100%;
+  height: 46px;
+  background: linear-gradient(135deg, #0CE093 0%, #0ab98a 100%);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(12, 224, 147, 0.3);
+  margin-top: 4px;
+}
+.login-card .btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(12, 224, 147, 0.4);
+}
+.login-card .btn-login:active { transform: translateY(0); }
+
+.login-card .account-link {
+  text-align: center;
+  margin-top: 20px;
+}
+.login-card .account-link a {
+  color: rgba(255,255,255,0.45);
+  font-size: 12px;
+  margin: 0 8px;
+  transition: color 0.2s;
+}
+.login-card .account-link a:hover { color: #0CE093; }
+
+.login-card .copyright {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 24px;
+}
+
+/* 重力特效画布 */
+#gravity-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---------- 后台布局 ---------- */
+body.dashboard-body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: #F0F4F8;
+  min-height: 100vh;
+}
+
+/* 顶部导航 */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 58px;
+  background: linear-gradient(135deg, #1B2A3B 0%, #243447 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+}
+.top-nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.top-nav .brand-icon {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #0CE093, #0ab98a);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 10px rgba(12,224,147,0.3);
+}
+.top-nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-nav .user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.top-nav .user-chip:hover { background: rgba(255,255,255,0.08); }
+.top-nav .user-avatar {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #0CE093, #0ab98a);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #fff;
+  font-weight: 600;
+}
+.top-nav .logout-btn {
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.top-nav .logout-btn:hover {
+  background: rgba(255,80,80,0.15);
+  color: #ff6b6b;
+}
+
+/* 侧边栏 */
+.sidebar {
+  position: fixed;
+  top: 58px; left: 0; bottom: 0;
+  width: 220px;
+  background: #1B2A3B;
+  overflow-y: auto;
+  z-index: 900;
+  box-shadow: 2px 0 16px rgba(0,0,0,0.1);
+}
+.sidebar .sidebar-title {
+  padding: 20px 20px 10px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.sidebar .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.sidebar .nav-item:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+}
+.sidebar .nav-item.active {
+  background: rgba(12, 224, 147, 0.1);
+  color: #0CE093;
+  border-left-color: #0CE093;
+}
+.sidebar .nav-item .nav-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+.sidebar .nav-item .nav-arrow {
+  margin-left: auto;
+  font-size: 10px;
+  opacity: 0.4;
+}
+
+/* 主内容区 */
+.main-content {
+  margin-left: 220px;
+  margin-top: 58px;
+  padding: 28px 32px;
+  min-height: calc(100vh - 58px);
+}
+
+/* 页面标题栏 */
+.page-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1B2A3B;
+}
+.page-title span {
+  color: #0CE093;
+}
+.breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #888;
+}
+.breadcrumb-bar a:hover { color: #0CE093; }
+
+/* 卡片面板 */
+.dash-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.dash-card .card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B2A3B;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dash-card .card-title .accent { color: #0CE093; }
+
+/* 按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #0CE093, #0ab98a);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(12,224,147,0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(12,224,147,0.35);
+}
+.btn-default {
+  background: #f5f6f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  color: #555;
+  font-size: 13px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-default:hover { background: #eef0f2; }
+
+/* 表格 */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.data-table th {
+  background: #f5f7fa;
+  color: #555;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-align: center;
+  border-bottom: 2px solid #e8ecef;
+}
+.data-table td {
+  padding: 12px 14px;
+  text-align: center;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+.data-table tr:hover td { background: #f8fff9; }
+.data-table .cell-check { width: 30px; }
+
+/* 路径导航（内容页内） */
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 16px;
+}
+.breadcrumb-nav a { color: #0CE093; }
+.breadcrumb-nav a:hover { text-decoration: underline; }
+
+/* 面板 */
+.panel-primary {
+  border: 1px solid #e8ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.panel-primary .panel-heading {
+  background: linear-gradient(135deg, #1B2A3B, #243447);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border: none;
+}
+.panel-primary .panel-body { padding: 16px 18px; }
+
+/* 版权 */
+.footer-copyright {
+  text-align: center;
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+/* ---------- 注册页 ---------- */
+body.reg-body {
+  background: linear-gradient(135deg, #0a1a12 0%, #0d2b1a 40%, #0a1a12 100%);
+  min-height: 100vh;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reg-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 40px 36px;
+  width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.reg-card h2 {
+  color: #fff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+.reg-card .form-item { margin-bottom: 16px; position: relative; }
+.reg-card .form-item .icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.4); font-size: 16px;
+}
+.reg-card .form-item .input-txt {
+  width: 100%; height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 0 16px 0 44px;
+  color: #fff; font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.reg-card .form-item .input-txt::placeholder { color: rgba(255,255,255,0.3); }
+.reg-card .form-item .input-txt:focus {
+  outline: none;
+  border-color: #0CE093;
+  box-shadow: 0 0 0 3px rgba(12,224,147,0.15);
+  background: rgba(255,255,255,0.12);
+}
+.reg-card .btn-reg {
+  width: 100%; height: 44px;
+  background: linear-gradient(135deg, #0CE093, #0ab98a);
+  border: none; border-radius: 10px;
+  color: #fff; font-size: 14px; font-weight: 600;
+  letter-spacing: 2px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(12,224,147,0.3);
+  margin-top: 6px;
+}
+.reg-card .btn-reg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(12,224,147,0.4);
+}
+.reg-card .back-link {
+  text-align: center; margin-top: 18px;
+}
+.reg-card .back-link a {
+  color: rgba(255,255,255,0.4); font-size: 12px;
+}
+.reg-card .back-link a:hover { color: #0CE093; }
+
+/* 响应式 */
+@media(max-width: 768px) {
+  .sidebar { display: none; }
+  .main-content { margin-left: 0; padding: 16px; }
+  .top-nav { padding: 0 16px; }
+}

@@ -4,61 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <title>修改密码</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-  <script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
-  <script type="text/javascript" src="layer/layer.js" ></script>
-  <style>
-    .content{
-      margin-top: 20px;
-    }
-    .table{
-      font-size: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/page.css" />
+  <script src="js/jquery-3.2.1.js"></script>
+  <script src="layer/layer.js"></script>
 </head>
-<body>
-<!-- 路径导航 -->
-<ol class="breadcrumb">
-  <li><a href="">修改密码</a></li>
-</ol>
-<!-- 面板 -->
-<div class="panel panel-primary">
-  <div class="panel-heading">用户详情</div>
-  <div class="panel-body">
-    <form action="changePasswordServlet" class="form-horizontal"  target="_parent">
+<body class="content-body">
 
-      <!--     将id的数据隐藏起来,方便后面传给更新serlvlet.但是不显示到页面上 -->
-      <input value="${sessionScope.u.id}" name="id" type="hidden">
-
-
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">用户名</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="username"
-                 id="music_name" readonly value="${sessionScope.u.username}">
-        </div>
-      </div>
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">原密码</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" name="oldpwd" id="artist"
-           value="${sessionScope.u.password}" readonly>
-        </div>
-      </div>
-      <div class="form-group form-group-sm">
-        <label class="col-sm-2 col-md-1 control-label">新密码</label>
-        <div class="col-sm-5 col-md-6">
-          <input type="text" class="form-control" id="ablum" name="newpwd" >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-3 col-md-4 col-sm-offset-4">
-          <a><button id="btn" type="submit" class="btn btn-primary btn-block">确认修改</button></a>
-        </div>
-      </div>
-    </form>
+<div class="page-header-bar">
+  <div class="breadcrumb-bar">
+    <a href="home_page.jsp">首页</a> <span>›</span> 修改密码
   </div>
 </div>
+
+<div class="form-panel" style="max-width:520px;">
+  <div class="form-title">🔑 修改密码</div>
+  <form action="changePasswordServlet" target="_parent">
+    <input value="${sessionScope.u.id}" name="id" type="hidden">
+
+    <div class="form-row">
+      <label>用户名</label>
+      <input type="text" class="input-field" name="username" readonly value="${sessionScope.u.username}" />
+    </div>
+    <div class="form-row">
+      <label>原密码</label>
+      <input type="text" class="input-field" name="oldpwd" readonly value="${sessionScope.u.password}" style="background:#f5f5f5;color:#888;" />
+    </div>
+    <div class="form-row">
+      <label>新密码</label>
+      <input type="text" class="input-field" name="newpwd" placeholder="请输入新密码" required />
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button type="submit" class="btn-primary" style="height:40px;padding:0 28px;display:inline-flex;align-items:center;gap:6px;">
+        ✅ 确认修改
+      </button>
+      <a href="home_page.jsp" class="btn-default" style="height:40px;padding:0 20px;display:inline-flex;align-items:center;text-decoration:none;">
+        ← 返回
+      </a>
+    </div>
+  </form>
+</div>
+
 </body>
 </html>
