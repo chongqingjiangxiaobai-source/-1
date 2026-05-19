@@ -72,14 +72,14 @@
     <div class="stat-card">
       <div class="stat-icon" style="background:rgba(12,224,147,0.12);color:#0CE093;">📦</div>
       <div class="stat-info">
-        <div class="stat-num" id="stat-goods">--</div>
+        <div class="stat-num" id="stat-goods">${goods == null ? 0 : goods.size()}</div>
         <div class="stat-label">库存条目</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon" style="background:rgba(59,130,246,0.12);color:#3b82f6;">👥</div>
       <div class="stat-info">
-        <div class="stat-num" id="stat-clients">--</div>
+        <div class="stat-num" id="stat-clients">${client == null ? 0 : client.size()}</div>
         <div class="stat-label">客户数量</div>
       </div>
     </div>
