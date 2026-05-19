@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
  * @Date 2022-12-11 20:05
  */
 
-public class text {
+public class Text {
     public static void main(String[] args) {
         String string = JSON.toJSONString(true);
         System.out.println(string);

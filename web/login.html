@@ -21,7 +21,7 @@
 				<!-- 登录表单 -->
 				<div class="login-form">
                     <!--此处映射对应的servlet请求地址!!!!-->
-					<form action="home_page.jsp">
+					<form action="loginServlet" method="POST">
 						<div class="input-gorup">
 							<span class="icon icon-user"></span>
 							<input type="text" name="username" class="input-txt" placeholder="请输入账号名称" />
@@ -36,7 +36,7 @@
 
 						<!-- 注意:在H5中button按钮若在form表单中，默认就有提交效果，
 						若不要默认的提交效果，则可以加上type属性，并把值设置为button即可 -->
-						<input class="btn-login" value="登录" type="button" onclick="mylogin()">
+						<input class="btn-login" value="登录" type="submit">
 					</form>
 					<div class="account-link">
 						<a href="">忘记密码?</a>
