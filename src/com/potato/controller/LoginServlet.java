@@ -1,5 +1,6 @@
 package com.potato.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.potato.entity.Client;
 import com.potato.entity.Goods;
 import com.potato.entity.User;
@@ -20,8 +21,8 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 修复1：将响应头改为 HTML 格式，以便浏览器能执行后面我们写的 script 弹窗代码
-        resp.setContentType("text/html;charset=utf-8");
+        // 关键：告诉前端我们返回的是 JSON 格式数据
+        resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
 
         String username = req.getParameter("username");
@@ -31,19 +32,20 @@ public class LoginServlet extends HttpServlet {
         User u = userService.login(username, pwd);
 
         if (u == null) {
-            // 修复2：登录失败时，不再打印干巴巴的 false，而是弹窗提示并让页面留在登录页
-            out.print("<script>alert('账号或密码错误，请重新输入！'); window.location.href='login.html';</script>");
+            // 登录失败，返回 JSON 布尔值 false
+            out.println(JSON.toJSONString(false));
         } else {
-            List<Goods> goods = new UpdateInformation().findGoodsByid(u.getId());
+            // 登录成功，将信息存入 Session
             HttpSession session = req.getSession();
-
+            List<Goods> goods = new UpdateInformation().findGoodsByid(u.getId());
             List<Client> client = new UpdateInformation().findClientByid(u.getId());
+
             session.setAttribute("u", u);
             session.setAttribute("client", client);
             session.setAttribute("goods", goods);
 
-            // 修复3：登录成功时，不再打印 true，而是使用 Servlet 原生的重定向，直接跳转到系统主页
-            resp.sendRedirect("home_page.jsp");
+            // 返回 JSON 布尔值 true
+            out.println(JSON.toJSONString(true));
         }
     }
 }
