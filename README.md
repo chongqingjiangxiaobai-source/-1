@@ -60,14 +60,28 @@ warehouse-management-system/
 - 修改客户信息
 - 删除客户信息
 
-## 快速开始
+## 在线演示
 
-### 1. 环境要求
+> ⚠️ **提示**：将下方链接中的 `<YOUR_HOST>` 和 `<PORT>` 替换为你的服务器地址和端口
+
+| 环境 | 地址 |
+|------|------|
+| 主站 | `http://<YOUR_HOST>:<PORT>/warehouse/login.html` |
+| 注册页 | `http://<YOUR_HOST>:<PORT>/warehouse/reg.html` |
+
+### 示例（假设部署在本地 8080 端口）
+```
+http://localhost:8080/warehouse/login.html
+```
+
+### 快速开始
+
+#### 1. 环境要求
 - JDK 8+
 - MySQL 5.7+
 - Tomcat 9+
 
-### 2. 数据库配置
+#### 2. 数据库配置
 
 ```sql
 CREATE DATABASE warehouse DEFAULT CHARACTER SET utf8mb4;
@@ -105,7 +119,7 @@ CREATE TABLE goods_id (
 );
 ```
 
-### 3. 数据库连接配置
+#### 3. 数据库连接配置
 
 编辑 `src/com/potato/util/jdbc.properties`：
 ```properties
@@ -115,7 +129,7 @@ url=jdbc:mysql://localhost:3306/warehouse?serverTimezone=Asia/Shanghai
 driverName=com.mysql.cj.jdbc.Driver
 ```
 
-### 4. 部署运行
+#### 4. 部署运行
 
 **方式一：IDE 部署**
 1. 将项目导入 IntelliJ IDEA / Eclipse
@@ -127,7 +141,7 @@ driverName=com.mysql.cj.jdbc.Driver
 2. 将生成的 WAR 包复制到 Tomcat webapps 目录
 3. 重启 Tomcat 访问
 
-### 5. 首次使用
+#### 5. 首次使用
 
 1. 访问注册页面创建管理员账号
 2. 注册完成后自动跳转登录页
