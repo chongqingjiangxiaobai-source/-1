@@ -11,11 +11,7 @@ html, body { height: 100%; }
 body.glass-body {
   font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
   background: linear-gradient(155deg, #dff5ec 0%, #b8e8d8 35%, #d4efe3 65%, #edf8f2 100%);
-  min-height: 100vh;
-  color: #1a2a3a;
-  overflow-x: hidden;
-  position: relative;
-}
+  min-height: 100vh;}
 
 /* 光源光晕 */
 body.glass-body::before {
