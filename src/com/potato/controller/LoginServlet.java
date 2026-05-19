@@ -19,8 +19,7 @@ import java.util.List;
 
 /**
  * @Author potato
- * @PackageName:com.potato.controller
- * @Description: TODO 登录之后页面渲染
+ * @Description 登录之后页面渲染
  * @Date 2022-12-04 13:42
  */
 
@@ -28,29 +27,32 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out=resp.getWriter();
-        //获得请求参数
-        String username=req.getParameter("username");
-        String pwd=req.getParameter("pwd");
-        //访问用户业务层
-        UserService userService=new UserServiceImpl();
-        User u=userService.login(username,pwd);
-        if(u == null){
+        // 设置响应内容类型为JSON
+        resp.setContentType("application/json;charset=utf-8");
+        PrintWriter out = resp.getWriter();
+
+        // 获得请求参数
+        String username = req.getParameter("username");
+        String pwd = req.getParameter("pwd");
+
+        // 访问用户业务层
+        UserService userService = new UserServiceImpl();
+        User u = userService.login(username, pwd);
+
+        if (u == null) {
             out.println(JSON.toJSONString(false));
-        }else{
-            //根据用户id--->获取关联的货物对象
-            List<Goods> goods=new UpdateInformation().findGoodsByid(u.getId());
-            //使用会话绑定数据
-            HttpSession session=req.getSession();
-            User u2=userService.select2(username);
-            List<Client>  client=new UpdateInformation().findClientByid(u.getId());
-            session.setAttribute("u",u2);
-            System.out.println(u);
-            session.setAttribute("client",client);
-            session.setAttribute("goods",goods);
-            //如果不是异步,,转发到home_page.jsp
+        } else {
+            // 登录成功后，使用同一个u对象存入session，避免重复查询
+            HttpSession session = req.getSession();
+            session.setAttribute("u", u);
+
+            // 根据用户id获取关联的货物对象和客户对象
+            List<Goods> goods = new UpdateInformation().findGoodsByid(u.getId());
+            List<Client> client = new UpdateInformation().findClientByid(u.getId());
+            session.setAttribute("client", client);
+            session.setAttribute("goods", goods);
+
             out.println(JSON.toJSONString(true));
         }
     }
-
 }

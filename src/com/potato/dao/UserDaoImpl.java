@@ -3,225 +3,205 @@ package com.potato.dao;
 import com.potato.util.DBUtils;
 import com.potato.entity.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @Author potato
- * @PackageName:com.potato.dao
- * @Description: TODO 用户表接口实现类,操作数据库
+ * @Description 用户表接口实现类，操作数据库
  * @Date 2022-12-05 21:45
  */
 
-
 public class UserDaoImpl implements UserDao {
-    //连接对象
-    Connection conn=null;
-    //语句处理
-    PreparedStatement ps=null;
-    //结果集
-    ResultSet rs=null;
 
     /**
      * 注册
-     * @param u
-     * @return
+     * @param u 用户对象
+     * @return 是否成功
      */
     @Override
     public boolean save(User u) {
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
-            conn= DBUtils.getConn();
-            String sql="insert into warehouse.user(username,password)  values (?,?)";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1,u.getUsername());
-            ps.setString(2,u.getPassword());
-            return ps.executeUpdate()>0;
+            conn = DBUtils.getConn();
+            String sql = "insert into user(username, password) values (?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getPassword());
+            return ps.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,null);
+        } finally {
+            DBUtils.close(conn, ps, null);
         }
         return false;
     }
 
-
     /**
      * 登录
-     * @param username
-     * @param password
-     * @return
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户对象或null
      */
     @Override
     public User login(String username, String password) {
-        //1.获得连接对象
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            conn= DBUtils.getConn();
-            //2.sql
-            String sql="select * from warehouse.user where username=? and password=?";
-            //3.获得语句处理对象
-            ps=conn.prepareStatement(sql);
-            //4.参数赋值
-            ps.setString(1,username);
-            ps.setString(2,password);
-            //5.执行获得结果集
-            rs=ps.executeQuery();
-            //6.判定迭代
-            while(rs.next()){
-                User u=new User(rs.getInt("id"), username,password);
+            conn = DBUtils.getConn();
+            String sql = "select * from user where username=? and password=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getInt("id"), username, password);
+                u.setAge(rs.getInt("age"));
+                u.setGender(rs.getString("gender"));
                 return u;
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,rs);
+        } finally {
+            DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
     /**
-     * 根据管理员账号判断是否被注册
-     * @param username
-     * @return
+     * 根据用户名判断是否被注册
+     * @param username 用户名
+     * @return 用户对象或null
      */
     @Override
     public User findByUsername(String username) {
-        //1.获得连接对象
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            conn= DBUtils.getConn();
-            //2.sql
-            String sql="select * from warehouse.user where username=?";
-            //3.获得语句处理对象
-            ps=conn.prepareStatement(sql);
-            //4.参数赋值
-            ps.setString(1,username);
-            //5.执行获得结果集
-            rs=ps.executeQuery();
-            //6.判定迭代
-            while(rs.next()){
-                User u=new User(rs.getInt("id"), username, rs.getString("password"));
+            conn = DBUtils.getConn();
+            String sql = "select * from user where username=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getInt("id"), username, rs.getString("password"));
+                u.setAge(rs.getInt("age"));
+                u.setGender(rs.getString("gender"));
                 return u;
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,rs);
+        } finally {
+            DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
     /**
      * 修改密码
-     * @param username
-     * @return
+     * @param username 用户名
+     * @param password 新密码
+     * @return 是否成功
      */
     @Override
-    public boolean rePwd(String username,String password) {
+    public boolean rePwd(String username, String password) {
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
-            conn=DBUtils.getConn();
-            String sql="update warehouse.user set password=? where username=?";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1,password);
-            ps.setString(2,username);
-            return ps.executeUpdate()>0;
+            conn = DBUtils.getConn();
+            String sql = "update user set password=? where username=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, username);
+            return ps.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,null);
+        } finally {
+            DBUtils.close(conn, ps, null);
         }
         return false;
     }
 
-
     /**
      * 查询管理员信息
-     * @param id
-     * @return
+     * @param id 用户ID
+     * @return 用户对象或null
      */
+    @Override
     public User select1(int id) {
-        //1.获得链接
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            conn=DBUtils.getConn();
-            //2.sql语句
-            String sql="select * from warehouse.user where id=?";
-            //3.获得预编译语句对象
-            ps=conn.prepareStatement(sql);
-            //4.赋值参数
-            ps.setInt(1,id);
-            //5.执行操作
-            rs=ps.executeQuery();
-            //6.通过游标判定是否查询出了数据
-            while(rs.next()){
+            conn = DBUtils.getConn();
+            String sql = "select * from user where id=?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 return rsToUser(rs);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,rs);
+        } finally {
+            DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
     /**
-     * 查询管理员信息
-     * @param name
-     * @return
+     * 根据用户名查询管理员信息
+     * @param name 用户名
+     * @return 用户对象或null
      */
+    @Override
     public User select2(String name) {
-        //1.获得链接
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            conn=DBUtils.getConn();
-            //2.sql语句
-            String sql="select * from warehouse.user where username=?";
-            //3.获得预编译语句对象
-            ps=conn.prepareStatement(sql);
-            //4.赋值参数
-            ps.setString(1,name);
-            //5.执行操作
-            rs=ps.executeQuery();
-            //6.通过游标判定是否查询出了数据
-            while(rs.next()){
+            conn = DBUtils.getConn();
+            String sql = "select * from user where username=?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 return rsToUser(rs);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            DBUtils.close(conn,ps,rs);
+        } finally {
+            DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
-
     /**
-     * 封装结果集--->解析为具体的Java对象
-     * @param rs
-     * @return
+     * 封装结果集 -> 解析为具体的Java对象
+     * @param rs 结果集
+     * @return 用户对象
      */
     private User rsToUser(ResultSet rs) throws SQLException {
-        User s=new User();
-        int id1=rs.getInt("id");
-        s.setId(id1);
+        User s = new User();
+        s.setId(rs.getInt("id"));
         s.setUsername(rs.getString("username"));
         s.setPassword(rs.getString("password"));
-        int age = rs.getInt("age");
-        s.setAge(age);
+        s.setAge(rs.getInt("age"));
         s.setGender(rs.getString("gender"));
         return s;
     }
-
-
-
 }
