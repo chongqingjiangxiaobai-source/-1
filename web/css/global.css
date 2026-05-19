@@ -1,6 +1,6 @@
 /* ================================================
-   仓库管理系统 - 液态玻璃主题 v2
-   浅色背景 + 玻璃态卡片 | 主色: #0CE093
+   仓库管理系统 - 液态玻璃v3 · 光影质感版
+   浅色背景 + 玻璃光泽 + 光影层叠
    ================================================ */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -10,51 +10,75 @@ html, body { height: 100%; }
 /* ---------- 背景 ---------- */
 body.glass-body {
   font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  background: linear-gradient(145deg, #e8f5f0 0%, #d4f0e8 40%, #f0f7f4 100%);
+  background: linear-gradient(155deg, #dff5ec 0%, #b8e8d8 35%, #d4efe3 65%, #edf8f2 100%);
   min-height: 100vh;
-  color: #2d3748;
+  color: #1a2a3a;
   overflow-x: hidden;
   position: relative;
 }
 
-/* 柔和光效 */
+/* 光源光晕 */
 body.glass-body::before {
   content: '';
   position: fixed;
-  top: -30%; left: -15%;
-  width: 70%; height: 70%;
-  background: radial-gradient(ellipse at center, rgba(12,224,147,0.08) 0%, transparent 65%);
+  top: -40%; left: 10%;
+  width: 80%; height: 80%;
+  background: radial-gradient(ellipse at center, rgba(12, 224, 147, 0.12) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 body.glass-body::after {
   content: '';
   position: fixed;
-  bottom: -25%; right: -10%;
-  width: 60%; height: 60%;
-  background: radial-gradient(ellipse at center, rgba(59,130,246,0.06) 0%, transparent 65%);
+  bottom: -30%; right: -10%;
+  width: 70%; height: 70%;
+  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* ---------- 玻璃卡片 ---------- */
+/* ---------- 光泽玻璃卡片 ---------- */
 .glass-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(12, 160, 100, 0.1), 0 2px 12px rgba(0, 0, 0, 0.06);
   position: relative;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 22px;
+  box-shadow:
+    0 8px 32px rgba(12, 160, 100, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(12, 224, 147, 0.08);
+  overflow: hidden;
   z-index: 1;
 }
+/* 顶部光泽条 */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 30%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,0.9) 70%, transparent);
+  border-radius: 22px 22px 0 0;
+}
+/* 左边缘高光 */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 10%; left: 0;
+  width: 1px;
+  height: 80%;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.6) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 70%, transparent);
+}
+
 .glass-card .card-title {
   font-size: 14px;
   font-weight: 700;
   color: #1B2A3B;
   margin-bottom: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid rgba(12, 224, 147, 0.1);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -65,16 +89,26 @@ body.glass-body::after {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 60px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(12, 224, 147, 0.15);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(12, 160, 100, 0.08);
+  box-shadow:
+    0 4px 20px rgba(12, 160, 100, 0.08),
+    0 1px 0 rgba(255,255,255,1),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.top-nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(12,224,147,0.3) 50%, transparent);
 }
 .top-nav .brand {
   display: flex;
@@ -83,7 +117,6 @@ body.glass-body::after {
   color: #1B2A3B;
   font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.5px;
 }
 .top-nav .brand-icon {
   width: 34px; height: 34px;
@@ -91,7 +124,9 @@ body.glass-body::after {
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 17px;
-  box-shadow: 0 4px 16px rgba(12, 224, 147, 0.3);
+  box-shadow:
+    0 4px 16px rgba(12, 224, 147, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.3);
 }
 .top-nav .nav-right {
   display: flex;
@@ -108,17 +143,22 @@ body.glass-body::after {
   padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   background: rgba(12, 224, 147, 0.08);
   border: 1px solid rgba(12, 224, 147, 0.15);
+  box-shadow: 0 2px 8px rgba(12,224,147,0.06);
 }
-.top-nav .user-chip:hover { background: rgba(12, 224, 147, 0.15); }
+.top-nav .user-chip:hover {
+  background: rgba(12, 224, 147, 0.15);
+  box-shadow: 0 4px 16px rgba(12,224,147,0.12);
+}
 .top-nav .user-avatar {
   width: 28px; height: 28px;
   background: linear-gradient(135deg, #0CE093, #0ab98a);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; color: #fff; font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 /* ---------- 侧边栏 ---------- */
@@ -126,14 +166,15 @@ body.glass-body::after {
   position: fixed;
   top: 60px; left: 0; bottom: 0;
   width: 230px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.52);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(12, 224, 147, 0.12);
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
   z-index: 900;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: 4px 0 20px rgba(12,160,100,0.05);
 }
 .sidebar .sidebar-title {
   padding: 20px 22px 10px;
@@ -153,6 +194,7 @@ body.glass-body::after {
   transition: all 0.25s;
   border-left: 3px solid transparent;
   margin: 1px 0;
+  position: relative;
 }
 .sidebar .nav-item:hover {
   background: rgba(12, 224, 147, 0.08);
@@ -167,7 +209,7 @@ body.glass-body::after {
 .sidebar .nav-item .nav-icon { font-size: 16px; width: 20px; text-align: center; }
 .sidebar .nav-divider {
   height: 1px;
-  background: rgba(12, 224, 147, 0.1);
+  background: linear-gradient(90deg, transparent, rgba(12,224,147,0.15) 50%, transparent);
   margin: 8px 22px;
 }
 
@@ -205,7 +247,7 @@ body.glass-body::after {
 .breadcrumb-bar a { color: #0ab98a; }
 .breadcrumb-bar a:hover { text-decoration: underline; }
 
-/* ---------- 统计卡片 ---------- */
+/* ---------- 统计卡片 (带光泽) ---------- */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -213,21 +255,37 @@ body.glass-body::after {
   margin-bottom: 20px;
 }
 @media(max-width: 1000px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+
 .stat-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 18px;
   padding: 22px 20px;
   display: flex;
   align-items: center;
   gap: 16px;
   transition: transform 0.25s, box-shadow 0.25s;
-  box-shadow: 0 4px 20px rgba(12, 160, 100, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow:
+    0 6px 24px rgba(12, 160, 100, 0.1),
+    0 2px 8px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.95) 60%, transparent);
 }
 .stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(12, 160, 100, 0.15), 0 4px 12px rgba(0,0,0,0.06);
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px rgba(12, 160, 100, 0.18),
+    0 4px 16px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95);
 }
 .stat-icon {
   width: 50px; height: 50px;
@@ -235,6 +293,7 @@ body.glass-body::after {
   display: flex; align-items: center; justify-content: center;
   font-size: 22px;
   flex-shrink: 0;
+  position: relative;
 }
 .stat-info { flex: 1; }
 .stat-num {
@@ -264,17 +323,31 @@ body.glass-body::after {
   gap: 6px;
   font-family: inherit;
   font-weight: 600;
-  box-shadow: 0 4px 16px rgba(12, 224, 147, 0.25);
+  box-shadow:
+    0 4px 16px rgba(12, 224, 147, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  position: relative;
+}
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+  border-radius: 10px 10px 0 0;
+  pointer-events: none;
 }
 .btn-glass:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(12, 224, 147, 0.35);
+  box-shadow:
+    0 8px 28px rgba(12, 224, 147, 0.38),
+    inset 0 1px 0 rgba(255,255,255,0.35);
 }
 .btn-glass:active { transform: translateY(0); }
 
 .btn-subtle {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(12, 224, 147, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   color: #555;
   border-radius: 10px;
   font-size: 13px;
@@ -285,12 +358,18 @@ body.glass-body::after {
   align-items: center;
   gap: 6px;
   font-family: inherit;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .btn-subtle:hover {
   background: rgba(12, 224, 147, 0.1);
   color: #0ab98a;
-  border-color: rgba(12, 224, 147, 0.3);
+  border-color: rgba(12,224,147,0.25);
+  box-shadow:
+    0 4px 16px rgba(12,224,147,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
 /* ---------- 下拉菜单 ---------- */
@@ -299,14 +378,25 @@ body.glass-body::after {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(12, 224, 147, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 14px;
   padding: 8px 0;
   min-width: 170px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(12, 160, 100, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
   z-index: 9999;
+  overflow: hidden;
+}
+.dropdown-menu-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 40%, transparent);
 }
 .dropdown-menu-glass .drop-item {
   display: flex;
@@ -336,11 +426,7 @@ body.glass-body::after {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 .announce-item:last-child { border-bottom: none; }
-.announce-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+.announce-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
 /* ---------- 表格 ---------- */
 .table-glass-wrap { overflow-x: auto; }
@@ -350,7 +436,7 @@ body.glass-body::after {
   font-size: 13px;
 }
 .data-table thead tr {
-  background: rgba(12, 224, 147, 0.05);
+  background: rgba(12, 224, 147, 0.04);
 }
 .data-table th {
   padding: 13px 16px;
@@ -385,8 +471,8 @@ body.glass-body::after {
   font-family: inherit;
 }
 .btn-tbl-edit:hover {
-  background: rgba(12, 224, 147, 0.2);
-  box-shadow: 0 2px 12px rgba(12, 224, 147, 0.15);
+  background: rgba(12, 224, 147, 0.18);
+  box-shadow: 0 2px 10px rgba(12, 224, 147, 0.15);
 }
 .btn-tbl-del {
   background: rgba(255, 80, 80, 0.07);
@@ -401,7 +487,7 @@ body.glass-body::after {
 }
 .btn-tbl-del:hover {
   background: rgba(255, 80, 80, 0.12);
-  box-shadow: 0 2px 12px rgba(255, 80, 80, 0.12);
+  box-shadow: 0 2px 10px rgba(255, 80, 80, 0.1);
 }
 
 /* ---------- 表单 ---------- */
@@ -421,7 +507,7 @@ body.glass-body::after {
 .glass-input {
   height: 44px;
   background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(12, 224, 147, 0.2);
+  border: 1px solid rgba(12, 224, 147, 0.18);
   border-radius: 10px;
   padding: 0 16px;
   font-size: 13.5px;
@@ -429,12 +515,15 @@ body.glass-body::after {
   transition: border-color 0.25s, box-shadow 0.25s;
   width: 100%;
   font-family: inherit;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
 }
 .glass-input::placeholder { color: #aaa; }
 .glass-input:focus {
   outline: none;
   border-color: #0CE093;
-  box-shadow: 0 0 0 3px rgba(12, 224, 147, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(12, 224, 147, 0.1),
+    inset 0 1px 3px rgba(0,0,0,0.04);
   background: #fff;
 }
 .glass-input:read-only {
@@ -443,7 +532,7 @@ body.glass-body::after {
   cursor: not-allowed;
 }
 
-/* ---------- 登录页 ---------- */
+/* ---------- 登录页 (光影版) ---------- */
 .login-wrapper {
   position: relative;
   z-index: 10;
@@ -452,18 +541,41 @@ body.glass-body::after {
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background: linear-gradient(145deg, #e8f5f0 0%, #d4f0e8 40%, #f0f7f4 100%);
+  background: linear-gradient(155deg, #dff5ec 0%, #b8e8d8 35%, #d4efe3 65%, #edf8f2 100%);
 }
 .login-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 24px;
+  border-radius: 26px;
   padding: 44px 40px;
   width: 400px;
-  box-shadow: 0 20px 80px rgba(12, 160, 100, 0.12), 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow:
+    0 20px 80px rgba(12, 160, 100, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(12, 224, 147, 0.06);
   animation: cardEntrance 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow: hidden;
+}
+/* 顶部光泽 */
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent);
+}
+/* 右上光斑 */
+.login-card::after {
+  content: '';
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(12,224,147,0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 @keyframes cardEntrance {
   0% { opacity: 0; transform: translateY(30px) scale(0.97); }
@@ -472,11 +584,14 @@ body.glass-body::after {
 .login-card .logo-area {
   text-align: center;
   margin-bottom: 30px;
+  position: relative;
 }
 .login-card .logo-area img {
   width: 54px; height: 54px;
   border-radius: 14px;
-  box-shadow: 0 6px 24px rgba(12, 224, 147, 0.25);
+  box-shadow:
+    0 6px 24px rgba(12, 224, 147, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.5);
 }
 .login-card .logo-area h2 {
   color: #1B2A3B;
@@ -503,20 +618,23 @@ body.glass-body::after {
 .login-card .form-item .input-txt {
   width: 100%;
   height: 48px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(12, 224, 147, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(12, 224, 147, 0.18);
   border-radius: 12px;
   padding: 0 16px 0 46px;
   font-size: 14px;
   color: #1B2A3B;
   transition: border-color 0.25s, box-shadow 0.25s;
   font-family: inherit;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
 }
 .login-card .form-item .input-txt::placeholder { color: #aaa; }
 .login-card .form-item .input-txt:focus {
   outline: none;
   border-color: #0CE093;
-  box-shadow: 0 0 0 3px rgba(12, 224, 147, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(12, 224, 147, 0.1),
+    inset 0 1px 4px rgba(0,0,0,0.05);
   background: #fff;
 }
 .login-card #err-login {
@@ -539,13 +657,25 @@ body.glass-body::after {
   letter-spacing: 4px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 6px 24px rgba(12, 224, 147, 0.35);
-  margin-top: 6px;
-  font-family: inherit;
+  box-shadow:
+    0 6px 24px rgba(12, 224, 147, 0.35),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.login-card .btn-login::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent);
+  pointer-events: none;
 }
 .login-card .btn-login:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 36px rgba(12, 224, 147, 0.45);
+  box-shadow:
+    0 10px 36px rgba(12, 224, 147, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.35);
 }
 .login-card .account-link {
   text-align: center;
@@ -581,18 +711,30 @@ body.glass-body::after {
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background: linear-gradient(145deg, #e8f5f0 0%, #d4f0e8 40%, #f0f7f4 100%);
+  background: linear-gradient(155deg, #dff5ec 0%, #b8e8d8 35%, #d4efe3 65%, #edf8f2 100%);
 }
 .reg-card {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 24px;
+  border-radius: 26px;
   padding: 40px 40px;
   width: 400px;
-  box-shadow: 0 20px 80px rgba(12, 160, 100, 0.12), 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow:
+    0 20px 80px rgba(12, 160, 100, 0.14),
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
   animation: cardEntrance 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow: hidden;
+}
+.reg-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 25%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.95) 75%, transparent);
 }
 .reg-card h2 {
   color: #1B2A3B;
@@ -614,19 +756,21 @@ body.glass-body::after {
 }
 .reg-card .form-item .input-txt {
   width: 100%; height: 44px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(12, 224, 147, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(12, 224, 147, 0.18);
   border-radius: 10px;
   padding: 0 16px 0 44px;
   font-size: 14px; color: #1B2A3B;
   transition: border-color 0.25s, box-shadow 0.25s;
   font-family: inherit;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
 }
 .reg-card .form-item .input-txt::placeholder { color: #aaa; }
 .reg-card .form-item .input-txt:focus {
   outline: none;
   border-color: #0CE093;
-  box-shadow: 0 0 0 3px rgba(12, 224, 147, 0.1);
+  box-shadow: 0 0 0 3px rgba(12, 224, 147, 0.1), inset 0 1px 3px rgba(0,0,0,0.05);
+  background: #fff;
 }
 .reg-card .err-tip {
   display: block;
@@ -643,13 +787,25 @@ body.glass-body::after {
   color: #fff; font-size: 14px; font-weight: 700;
   letter-spacing: 3px; cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 20px rgba(12, 224, 147, 0.3);
-  margin-top: 8px;
+  box-shadow:
+    0 4px 20px rgba(12, 224, 147, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.3);
   font-family: inherit;
+  position: relative;
+}
+.reg-card .btn-reg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent);
+  border-radius: 10px 10px 0 0;
 }
 .reg-card .btn-reg:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(12, 224, 147, 0.4);
+  box-shadow:
+    0 8px 30px rgba(12, 224, 147, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.35);
 }
 .reg-card .back-link { text-align: center; margin-top: 18px; }
 .reg-card .back-link a { color: #888; font-size: 12px; }
