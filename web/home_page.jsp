@@ -77,7 +77,7 @@
   </div>
 
   <!-- 版权区 -->
-  <p class="text-center">&copy;财校 By Mr.Liu</p>
+  <p class="text-center">&copy;财校 By 枣庄学院</p>
 </div>
 </body>
 </html>
