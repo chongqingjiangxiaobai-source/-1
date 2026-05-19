@@ -1,6 +1,6 @@
 # 仓库管理系统
 
-📦 基于 JavaWeb 的仓库管理系统，支持货物管理、客户管理、用户权限等功能。
+📦 基于 JavaWeb 的仓库管理系统，支持货物管理、客户管理、用户权限等完整功能。
 
 ## 项目简介
 
@@ -9,13 +9,15 @@
 - 客户信息管理
 - 用户注册登录
 - 管理员密码修改
+- 库存实时搜索
 
 ## 技术栈
 
 | 分类 | 技术 |
 |------|------|
 | 后端 | Java / Servlet / JSP |
-| 前端 | HTML / CSS / JavaScript / Bootstrap |
+| 前端 | HTML / CSS / JavaScript / AJAX |
+| UI 风格 | 液态玻璃光影质感主题（Glassmorphism） |
 | 数据库 | MySQL |
 | 服务器 | Tomcat 9 |
 
@@ -26,15 +28,15 @@ warehouse-management-system/
 ├── src/
 │   └── com/potato/
 │       ├── controller/    # Servlet 控制器
-│       ├── dao/           # 数据访问层
-│       ├── entity/        # 实体类
-│       ├── filter/        # 过滤器
-│       ├── service/       # 业务逻辑层
-│       └── util/          # 工具类
+│       ├── dao/            # 数据访问层
+│       ├── entity/         # 实体类
+│       ├── filter/         # 过滤器（字符编码）
+│       ├── service/        # 业务逻辑层
+│       └── util/           # 工具类
 ├── web/
 │   ├── WEB-INF/          # Web 配置
+│   ├── css/              # 样式文件（液态玻璃主题）
 │   ├── js/               # 前端 JavaScript
-│   ├── css/              # 样式文件
 │   ├── img/              # 图片资源
 │   ├── bootstrap/        # Bootstrap 框架
 │   ├── layer/            # 弹窗插件
@@ -50,15 +52,25 @@ warehouse-management-system/
 - 密码修改
 
 ### 📦 仓库管理
-- 货物列表展示
+- 货物列表展示（支持实时搜索过滤）
 - 添加货物信息
 - 修改货物信息
-- 删除货物
+- 删除货物（修复 redirect 路径问题）
+- **库存搜索**：按货物名称、ID、存放地点实时过滤
 
 ### 👥 客户管理
 - 客户列表展示
 - 修改客户信息
 - 删除客户信息
+
+## 界面预览
+
+系统采用**液态玻璃光影质感主题**，设计特点：
+- 浅色柔和背景 + 白色玻璃态卡片
+- 卡片顶部光泽条 + 左边缘高光，模拟玻璃厚度感
+- 主色调 `#0CE093`（绿色）贯穿所有交互元素
+- 统计卡片 Dashboard，实时显示库存条目和客户数量
+- 响应式布局，适配不同屏幕
 
 ## 在线演示
 
@@ -68,6 +80,7 @@ warehouse-management-system/
 |------|------|
 | 主站 | `http://<YOUR_HOST>:<PORT>/warehouse/login.html` |
 | 注册页 | `http://<YOUR_HOST>:<PORT>/warehouse/reg.html` |
+| 首页 | `http://<YOUR_HOST>:<PORT>/warehouse/home_page.jsp` |
 
 ### 示例（假设部署在本地 8080 端口）
 ```
@@ -151,14 +164,15 @@ driverName=com.mysql.cj.jdbc.Driver
 
 | 页面 | 文件 | 说明 |
 |------|------|------|
-| 登录页 | `login.html` | 用户登录入口 |
+| 登录页 | `login.html` | 用户登录入口，液态玻璃风格 + 反重力粒子特效 |
 | 注册页 | `reg.html` | 管理员账号注册 |
-| 首页 | `home_page.jsp` | 系统主页面 |
-| 仓库列表 | `goods_list.jsp` | 货物管理页面 |
+| 首页 | `home_page.jsp` | Dashboard，统计卡片 + 快捷操作 + 系统公告 |
+| 仓库列表 | `goods_list.jsp` | 货物管理页面，含实时搜索引擎 |
 | 添加货物 | `add_goods.jsp` | 新增货物 |
 | 修改货物 | `modify.jsp` | 编辑货物信息 |
 | 客户管理 | `client.jsp` | 客户信息管理 |
 | 个人信息 | `personal_information.jsp` | 管理员信息 |
+| 修改密码 | `change_password.jsp` | 修改登录密码 |
 
 ## 问题修复记录
 
@@ -171,6 +185,9 @@ driverName=com.mysql.cj.jdbc.Driver
 | 5 | GoodsDaoImpl 列名大小写错误 | `Site` → `site` |
 | 6 | 表单验证逻辑不完整 | 增加确认密码校验 + 提交拦截 |
 | 7 | AJAX 路径使用绝对路径 | 改为相对路径，兼容不同部署环境 |
+| 8 | DeleteGoodsServlet 删除后 404 | redirect 路径添加 `req.getContextPath()` |
+| 9 | 首页统计卡片显示固定符号 | 改为 `${goods.size()}` / `${client.size()}` 实时取值 |
+| 10 | 仓库列表无法快速查找 | 增加前端实时搜索，支持按名称/ID/地点过滤 |
 
 ## 项目特色
 
@@ -179,7 +196,9 @@ driverName=com.mysql.cj.jdbc.Driver
 - ✅ **配置分离**：数据库配置外部化，易于部署
 - ✅ **前后端分离**：AJAX + JSON 实现无刷新交互
 - ✅ **表单验证**：前端 JS 实时校验 + 后端验证双重保障
+- ✅ **UI 主题**：液态玻璃光影质感，全端风格统一
+- ✅ **实时搜索**：前端 JS 过滤，无需刷新页面
 
 ## License
 
-MIT License © 2024
+MIT License © 2026 枣庄学院
