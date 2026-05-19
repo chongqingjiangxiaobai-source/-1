@@ -105,51 +105,66 @@ CREATE TABLE goods_id (
 );
 ```
 
-### 3. 修改数据库连接
+### 3. 数据库连接配置
 
 编辑 `src/com/potato/util/jdbc.properties`：
 ```properties
 username=root
-pwd=你的密码
+pwd=你的MySQL密码
 url=jdbc:mysql://localhost:3306/warehouse?serverTimezone=Asia/Shanghai
 driverName=com.mysql.cj.jdbc.Driver
 ```
 
 ### 4. 部署运行
 
-1. 将项目导入 IDE（IntelliJ IDEA / Eclipse）
-2. 配置 Tomcat 服务器
-3. 访问 `http://localhost:3000/warehouse/`
+**方式一：IDE 部署**
+1. 将项目导入 IntelliJ IDEA / Eclipse
+2. 配置 Tomcat 9 服务器
+3. 运行并访问 `http://localhost:8080/warehouse/`
 
-## 🔗 在线演示
+**方式二：WAR 包部署**
+1. 使用 Maven 打包：`mvn clean package`
+2. 将生成的 WAR 包复制到 Tomcat webapps 目录
+3. 重启 Tomcat 访问
 
-| 环境 | 地址 |
-|------|------|
-| 主站（端口3000） | http://123.207.205.179:3000/warehouse/ |
-| 备用站（端口3001） | http://123.207.205.179:3001/warehouse2/ |
+### 5. 首次使用
 
-### 测试账号
-- 用户名：`test`
-- 密码：`123456`
+1. 访问注册页面创建管理员账号
+2. 注册完成后自动跳转登录页
+3. 使用注册的账号密码登录系统
 
-## 页面预览
+## 页面说明
 
-| 登录页 | 注册页 |
-|:---:|:---:|
-| ![login](https://img.shields.io/badge/login-required-blue) | ![register](https://img.shields.io/badge/register-available-green) |
-
-| 首页 | 仓库列表 |
-|:---:|:---:|
-| `home_page.jsp` | `goods_list.jsp` |
+| 页面 | 文件 | 说明 |
+|------|------|------|
+| 登录页 | `login.html` | 用户登录入口 |
+| 注册页 | `reg.html` | 管理员账号注册 |
+| 首页 | `home_page.jsp` | 系统主页面 |
+| 仓库列表 | `goods_list.jsp` | 货物管理页面 |
+| 添加货物 | `add_goods.jsp` | 新增货物 |
+| 修改货物 | `modify.jsp` | 编辑货物信息 |
+| 客户管理 | `client.jsp` | 客户信息管理 |
+| 个人信息 | `personal_information.jsp` | 管理员信息 |
 
 ## 问题修复记录
 
-- ✅ DBUtils 硬编码路径 → ClassLoader 加载配置文件
-- ✅ DAO 层线程安全 → conn/ps/rs 改为局部变量
-- ✅ SQL 硬编码数据库前缀 → 移除 `warehouse.` 前缀
-- ✅ LoginServlet 重复查询 → 优化为单次查询
-- ✅ GoodsDaoImpl 列名大小写 → `Site` → `site`
-- ✅ 表单验证增强 → 确认密码校验 + 提交拦截
+| 编号 | 问题 | 修复方案 |
+|------|------|----------|
+| 1 | DBUtils 硬编码 Windows 路径 | 改用 ClassLoader 加载 classpath 下资源 |
+| 2 | DAO 层实例变量线程安全隐患 | conn/ps/rs 改为方法内局部变量 |
+| 3 | SQL 语句硬编码数据库前缀 | 移除所有 `warehouse.` 前缀 |
+| 4 | LoginServlet 重复数据库查询 | 优化为单次查询，Session 共用 User 对象 |
+| 5 | GoodsDaoImpl 列名大小写错误 | `Site` → `site` |
+| 6 | 表单验证逻辑不完整 | 增加确认密码校验 + 提交拦截 |
+| 7 | AJAX 路径使用绝对路径 | 改为相对路径，兼容不同部署环境 |
+
+## 项目特色
+
+- ✅ **分层架构**：Controller / Service / DAO 三层分离
+- ✅ **线程安全**：数据库连接等资源正确管理
+- ✅ **配置分离**：数据库配置外部化，易于部署
+- ✅ **前后端分离**：AJAX + JSON 实现无刷新交互
+- ✅ **表单验证**：前端 JS 实时校验 + 后端验证双重保障
 
 ## License
 
