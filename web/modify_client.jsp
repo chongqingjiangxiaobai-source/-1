@@ -11,50 +11,48 @@
   <script src="./js/xhr.js"></script>
   <script src="./js/list.js"></script>
 </head>
-<body class="content-body">
+<body class="glass-body">
 
-<div class="page-header-bar">
-  <div class="breadcrumb-bar">
-    <a href="home_page.jsp">首页</a> <span>›</span>
-    <a href="client.jsp">客户信息</a> <span>›</span> 修改
+<div class="main-content">
+  <div class="page-header-bar">
+    <div class="breadcrumb-bar">
+      <a href="home_page.jsp">首页</a> <span>›</span>
+      <a href="client.jsp">客户信息</a> <span>›</span> 修改
+    </div>
   </div>
-</div>
 
-<div class="form-panel" style="max-width:560px;">
-  <div class="form-title">✏️ 客户信息修改</div>
-  <form action="updateClientServlet" target="_parent">
-    <input value="${sessionScope.u.id}" name="uid" type="hidden">
+  <div class="glass-card glass-form" style="padding:32px;">
+    <div class="card-title">✏️ 客户信息修改</div>
+    <form action="updateClientServlet" target="_parent">
+      <input value="${sessionScope.u.id}" name="uid" type="hidden">
+      <div class="form-row">
+        <label>客户编号</label>
+        <input type="text" class="glass-input" name="clientId" value="${c.clientId}" readonly />
+      </div>
+      <div class="form-row">
+        <label>客户姓名</label>
+        <input type="text" class="glass-input" name="name" value="${c.name}" readonly />
+      </div>
+      <div class="form-row">
+        <label>性别</label>
+        <input type="text" class="glass-input" name="gender" value="${c.gender}" readonly />
+      </div>
+      <div class="form-row">
+        <label>货物 ID</label>
+        <input type="text" class="glass-input" name="goodsId" value="${c.goodsId}" />
+      </div>
+      <div class="form-row">
+        <label>需求数量</label>
+        <input type="text" class="glass-input" name="goodsNum" value="${c.goodsNum}" />
+      </div>
+      <div style="display:flex;gap:12px;margin-top:26px;">
+        <button type="submit" class="btn-glass" style="height:44px;padding:0 28px;">✅ 确认修改</button>
+        <a href="client.jsp" class="btn-subtle" style="height:44px;display:inline-flex;align-items:center;">← 返回</a>
+      </div>
+    </form>
+  </div>
 
-    <div class="form-row">
-      <label>客户编号</label>
-      <input type="text" class="input-field" name="clientId" value="${c.clientId}" readonly style="background:#f5f5f5;color:#888;" />
-    </div>
-    <div class="form-row">
-      <label>客户姓名</label>
-      <input type="text" class="input-field" name="name" value="${c.name}" readonly style="background:#f5f5f5;color:#888;" />
-    </div>
-    <div class="form-row">
-      <label>性别</label>
-      <input type="text" class="input-field" name="gender" value="${c.gender}" readonly style="background:#f5f5f5;color:#888;" />
-    </div>
-    <div class="form-row">
-      <label>货物 ID</label>
-      <input type="text" class="input-field" name="goodsId" value="${c.goodsId}" />
-    </div>
-    <div class="form-row">
-      <label>需求数量</label>
-      <input type="text" class="input-field" name="goodsNum" value="${c.goodsNum}" />
-    </div>
-
-    <div style="display:flex;gap:12px;margin-top:24px;">
-      <button type="submit" class="btn-primary" style="height:40px;padding:0 28px;display:inline-flex;align-items:center;gap:6px;">
-        ✅ 确认修改
-      </button>
-      <a href="client.jsp" class="btn-default" style="height:40px;padding:0 20px;display:inline-flex;align-items:center;text-decoration:none;">
-        ← 返回
-      </a>
-    </div>
-  </form>
+  <div class="footer-copyright">© 2026 枣庄学院 仓库管理系统</div>
 </div>
 </body>
 </html>

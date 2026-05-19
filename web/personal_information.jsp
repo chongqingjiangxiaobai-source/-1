@@ -9,46 +9,43 @@
   <script src="js/jquery-3.2.1.js"></script>
   <script src="./js/xhr.js"></script>
 </head>
-<body class="content-body">
+<body class="glass-body">
 
-<div class="page-header-bar">
-  <div class="breadcrumb-bar">
-    <a href="home_page.jsp">首页</a> <span>›</span> 个人信息
+<div class="main-content">
+  <div class="page-header-bar">
+    <div class="breadcrumb-bar">
+      <a href="home_page.jsp">首页</a> <span>›</span> 个人信息
+    </div>
+    <a href="change_password.jsp" class="btn-glass">🔑 修改密码</a>
   </div>
-  <a href="change_password.jsp" class="btn-primary" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
-    🔑 修改密码
-  </a>
-</div>
 
-<div class="form-panel" style="max-width:520px;">
-  <div class="form-title">👤 个人信息</div>
-  <table class="data-table" style="margin-top:8px;">
-    <tr>
-      <th style="background:#f5f7fa;text-align:right;width:120px;color:#888;">管理员ID</th>
-      <td style="text-align:left;padding-left:20px;">${u.id}</td>
-    </tr>
-    <tr>
-      <th style="background:#f5f7fa;text-align:right;color:#888;">账号</th>
-      <td style="text-align:left;padding-left:20px;">${u.username}</td>
-    </tr>
-    <tr>
-      <th style="background:#f5f7fa;text-align:right;color:#888;">年龄</th>
-      <td style="text-align:left;padding-left:20px;">${u.age}</td>
-    </tr>
-    <tr>
-      <th style="background:#f5f7fa;text-align:right;color:#888;">性别</th>
-      <td style="text-align:left;padding-left:20px;">${u.gender}</td>
-    </tr>
-  </table>
-  <div style="margin-top:24px;display:flex;gap:12px;">
-    <a href="change_password.jsp" class="btn-primary" style="height:36px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
-      🔑 修改密码
-    </a>
-    <a href="home_page.jsp" class="btn-default" style="height:36px;display:inline-flex;align-items:center;text-decoration:none;">
-      ← 返回首页
-    </a>
+  <div class="glass-card" style="padding:32px;max-width:520px;">
+    <div class="card-title">👤 个人信息</div>
+    <table class="data-table">
+      <tr>
+        <th style="text-align:right;padding-right:20px;width:110px;color:#888;">管理员ID</th>
+        <td style="text-align:left;padding-left:20px;">${u.id}</td>
+      </tr>
+      <tr>
+        <th style="text-align:right;padding-right:20px;color:#888;">账号</th>
+        <td style="text-align:left;padding-left:20px;">${u.username}</td>
+      </tr>
+      <tr>
+        <th style="text-align:right;padding-right:20px;color:#888;">年龄</th>
+        <td style="text-align:left;padding-left:20px;">${u.age}</td>
+      </tr>
+      <tr>
+        <th style="text-align:right;padding-right:20px;color:#888;">性别</th>
+        <td style="text-align:left;padding-left:20px;">${u.gender}</td>
+      </tr>
+    </table>
+    <div style="margin-top:26px;display:flex;gap:12px;">
+      <a href="change_password.jsp" class="btn-glass">🔑 修改密码</a>
+      <a href="home_page.jsp" class="btn-subtle">← 返回首页</a>
+    </div>
   </div>
-</div>
 
+  <div class="footer-copyright">© 2026 枣庄学院 仓库管理系统</div>
+</div>
 </body>
 </html>

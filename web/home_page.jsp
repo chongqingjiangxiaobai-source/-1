@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/global.css" />
   <link rel="stylesheet" href="css/home.css" />
 </head>
-<body class="dashboard-body">
+<body class="glass-body">
 
 <!-- 顶部导航 -->
 <div class="top-nav">
@@ -19,41 +19,39 @@
     <div class="user-chip" onclick="toggleUserMenu()">
       <div class="user-avatar">${sessionScope.u.username.substring(0,1)}</div>
       <span>${sessionScope.u.username}</span>
-      <span style="opacity:0.4;font-size:10px;">▼</span>
+      <span style="opacity:0.5;font-size:10px;">▼</span>
     </div>
-    <div class="dropdown-menu-mini" id="userMenu" style="display:none;position:absolute;top:58px;right:20px;background:#243447;border-radius:10px;padding:8px 0;min-width:160px;box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:9999;">
-      <a href="personal_information.jsp" class="dropdown-item">👤 个人信息</a>
-      <a href="change_password.jsp" class="dropdown-item">🔑 修改密码</a>
-      <div style="height:1px;background:rgba(255,255,255,0.1);margin:6px 0;"></div>
-      <a href="logoutServlet" class="dropdown-item" style="color:#ff6b6b;">🚪 安全退出</a>
+    <div class="dropdown-menu-glass" id="userMenu">
+      <a href="personal_information.jsp" class="drop-item">👤 个人信息</a>
+      <a href="change_password.jsp" class="drop-item">🔑 修改密码</a>
+      <div class="drop-divider"></div>
+      <a href="logoutServlet" class="drop-item danger">🚪 安全退出</a>
     </div>
   </div>
 </div>
 
 <!-- 侧边栏 -->
 <div class="sidebar">
-  <div class="sidebar-title">导航菜单</div>
-  <a href="goods_list.jsp" class="nav-item" onclick="navigate('goods_list.jsp', this)">
+  <div class="sidebar-title">导航</div>
+  <a href="goods_list.jsp" class="nav-item">
     <span class="nav-icon">📋</span> 仓库列表
   </a>
-  <a href="add_goods.jsp" class="nav-item" onclick="navigate('add_goods.jsp', this)">
+  <a href="add_goods.jsp" class="nav-item">
     <span class="nav-icon">➕</span> 仓库添加
   </a>
-  <a href="client.jsp" class="nav-item" onclick="navigate('client.jsp', this)">
+  <a href="client.jsp" class="nav-item">
     <span class="nav-icon">👥</span> 客户信息
   </a>
-  <a href="personal_information.jsp" class="nav-item" onclick="navigate('personal_information.jsp', this)">
+  <a href="personal_information.jsp" class="nav-item">
     <span class="nav-icon">👤</span> 个人信息
   </a>
-  <a href="change_password.jsp" class="nav-item" onclick="navigate('change_password.jsp', this)">
+  <a href="change_password.jsp" class="nav-item">
     <span class="nav-icon">🔑</span> 修改密码
   </a>
-
-  <div style="position:absolute;bottom:20px;left:0;right:0;padding:0 20px;">
-    <a href="logoutServlet" class="nav-item" style="color:rgba(255,107,107,0.7);">
-      <span class="nav-icon">🚪</span> 安全退出
-    </a>
-  </div>
+  <div class="nav-divider"></div>
+  <a href="logoutServlet" class="nav-item" style="color:rgba(224,85,85,0.7);">
+    <span class="nav-icon">🚪</span> 安全退出
+  </a>
 </div>
 
 <!-- 主内容区 -->
@@ -66,9 +64,7 @@
         <span>📅</span> <span id="current-time"></span>
       </div>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;">
-      <span style="font-size:12px;color:#888;">v2.0 · 2026</span>
-    </div>
+    <span style="font-size:12px;color:#aaa;">v2.0 · 2026</span>
   </div>
 
   <!-- 统计卡片 -->
@@ -90,42 +86,34 @@
     <div class="stat-card">
       <div class="stat-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b;">🕐</div>
       <div class="stat-info">
-        <div class="stat-num" style="font-size:14px;line-height:1.8;">实时</div>
+        <div class="stat-num" style="font-size:20px;line-height:1.6;">实时</div>
         <div class="stat-label">系统状态</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">✅</div>
       <div class="stat-info">
-        <div class="stat-num" style="font-size:14px;line-height:1.8;">在线</div>
+        <div class="stat-num" style="font-size:20px;line-height:1.6;">在线</div>
         <div class="stat-label">服务状态</div>
       </div>
     </div>
   </div>
 
   <!-- 快捷操作 -->
-  <div class="dash-card">
+  <div class="glass-card" style="padding:24px;margin-bottom:16px;">
     <div class="card-title">⚡ 快捷操作</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="add_goods.jsp" class="btn-primary" style="display:inline-flex;align-items:center;gap:6px;">
-        ➕ 添加入库
-      </a>
-      <a href="goods_list.jsp" class="btn-default" style="display:inline-flex;align-items:center;gap:6px;">
-        📋 查看库存
-      </a>
-      <a href="client.jsp" class="btn-default" style="display:inline-flex;align-items:center;gap:6px;">
-        👥 客户管理
-      </a>
-      <a href="personal_information.jsp" class="btn-default" style="display:inline-flex;align-items:center;gap:6px;">
-        👤 个人信息
-      </a>
+      <a href="add_goods.jsp" class="btn-glass">➕ 添加入库</a>
+      <a href="goods_list.jsp" class="btn-subtle">📋 查看库存</a>
+      <a href="client.jsp" class="btn-subtle">👥 客户管理</a>
+      <a href="personal_information.jsp" class="btn-subtle">👤 个人信息</a>
     </div>
   </div>
 
-  <!-- 最近操作记录 -->
-  <div class="dash-card">
+  <!-- 系统公告 -->
+  <div class="glass-card" style="padding:24px;">
     <div class="card-title">📝 系统公告</div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
+    <div style="display:flex;flex-direction:column;gap:8px;">
       <div class="announce-item">
         <span class="announce-dot" style="background:#0CE093;"></span>
         <span>系统运行正常，所有服务在线</span>
@@ -133,7 +121,7 @@
       </div>
       <div class="announce-item">
         <span class="announce-dot" style="background:#3b82f6;"></span>
-        <span>欢迎使用仓库管理系统 v2.0</span>
+        <span>欢迎使用仓库管理系统 v2.0 · 液态玻璃主题</span>
         <span style="margin-left:auto;font-size:11px;color:#bbb;">今天</span>
       </div>
       <div class="announce-item">
@@ -151,7 +139,6 @@
 
 <script src="js/jquery-3.2.1.js"></script>
 <script>
-// 时间
 function updateTime() {
   var now = new Date();
   var s = now.toLocaleString('zh-CN', {hour12:false, year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
@@ -160,7 +147,6 @@ function updateTime() {
 updateTime();
 setInterval(updateTime, 1000);
 
-// 用户菜单
 function toggleUserMenu() {
   var m = document.getElementById('userMenu');
   m.style.display = m.style.display === 'none' ? 'block' : 'none';
@@ -168,7 +154,7 @@ function toggleUserMenu() {
 document.addEventListener('click', function(e) {
   var chip = document.querySelector('.user-chip');
   var menu = document.getElementById('userMenu');
-  if (!chip.contains(e.target)) menu.style.display = 'none';
+  if (chip && !chip.contains(e.target)) menu.style.display = 'none';
 });
 </script>
 </body>
