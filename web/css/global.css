@@ -427,3 +427,86 @@ body.glass-body::before {
   .main-content { margin-left: 0; padding: 20px 16px; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
 }
+/* ── 页面切换动效 ── */
+.main-content {
+  animation: pageIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 子元素交错入场 */
+.stats-row    { animation: fadeUp 0.4s 0.05s both; }
+.glass-card   { animation: fadeUp 0.4s 0.1s both; }
+.footer-copyright { animation: fadeUp 0.4s 0.18s both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 统计卡片悬停 — 悬浮提升 */
+.stat-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+               box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(37,99,235,0.14), 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* 侧边栏项目 — 悬停滑动 */
+.sidebar .nav-item {
+  transition: background 0.18s ease, color 0.18s ease, border-left-color 0.18s ease, padding-left 0.18s ease;
+}
+.sidebar .nav-item:hover { padding-left: 24px; }
+
+/* 玻璃卡片悬停 — 阴影加深 */
+.glass-card {
+  transition: box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 按钮点击反馈 */
+.btn-primary:active, .btn-ghost:active { transform: scale(0.97); }
+
+/* 表格行 — 悬停高亮 */
+.data-table tbody tr {
+  transition: background 0.15s ease;
+}
+.data-table tbody tr:hover td { background: rgba(37,99,235,0.035); }
+
+/* 下拉菜单 — 淡入 */
+.dropdown-menu-glass {
+  animation: dropIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 输入框聚焦 — 边框发光 */
+.glass-input:focus {
+  animation: focusPulse 0.25s ease both;
+}
+@keyframes focusPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37,99,235,0.15), inset 0 1px 3px rgba(0,0,0,0.04); }
+  50%  { box-shadow: 0 0 0 4px rgba(37,99,235,0.12), inset 0 1px 3px rgba(0,0,0,0.04); }
+  100% { box-shadow: 0 0 0 3px rgba(37,99,235,0.08), inset 0 1px 3px rgba(0,0,0,0.04); }
+}
+
+/* 页面标题 — 滑入 */
+.page-header-bar { animation: fadeUp 0.35s both; }
+
+/* 面板标题栏 */
+.panel-header {
+  transition: background 0.15s ease;
+}
+
+/* 尊重用户减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .main-content, .stats-row, .glass-card, .footer-copyright,
+  .dropdown-menu-glass, .stat-card, .page-header-bar {
+    animation: none !important;
+    transition: none !important;
+  }
+}
