@@ -159,3 +159,34 @@ body.m3-liquid-body {
 
 /* ── 注册页错误提示 ── */
 .err-tip { display: block; font-size: 11px; text-align: left; padding-left: 48px; height: 16px; color: var(--m3-error); font-weight: 500; }
+
+/* ── 注册页多字段容器 ── */
+.reg-field-container { margin-bottom: 20px; width: 100%; }
+.reg-field-container .m3-field-group { margin-bottom: 4px; }
+
+/* ── M3 校验状态 ── */
+.err-tip {
+  display: block; font-size: 12px; font-weight: 500;
+  min-height: 16px; padding-left: 12px;
+  transition: all 0.2s ease;
+  opacity: 0; transform: translateY(-4px);
+}
+.err-tip:not(:empty) { opacity: 1; transform: translateY(0); }
+
+/* 错误状态 */
+.m3-field-group.m3-error-state .glass-input {
+  border-color: var(--m3-error) !important;
+  box-shadow: 0 0 0 3px rgba(186,26,26,0.12) !important;
+}
+.m3-field-group.m3-error-state .field-icon,
+.m3-field-group.m3-error-state label { color: var(--m3-error) !important; }
+.err-tip.error-state { color: var(--m3-error); }
+
+/* 成功状态 */
+.m3-field-group.m3-valid-state .glass-input {
+  border-color: #137333 !important;
+  box-shadow: 0 0 0 3px rgba(19,115,51,0.10) !important;
+}
+.m3-field-group.m3-valid-state .field-icon,
+.m3-field-group.m3-valid-state label { color: #137333 !important; }
+.err-tip.success-state { color: #137333; }

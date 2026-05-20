@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>管理员注册</title>
+  <title>管理员注册 - 仓库管理系统</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="css/login.css" />
@@ -22,40 +22,49 @@
 
       <div class="brand-area">
         <div class="m3-logo-glow">
-          <span class="material-icons-outlined logo-icon">inventory_2</span>
+          <span class="material-icons-outlined logo-icon">person_add</span>
         </div>
-        <h2>仓库管理系统</h2>
+        <h2>创建管理员账号</h2>
         <p>WAREHOUSE MANAGEMENT SYSTEM</p>
       </div>
 
       <form id="regForm" action="registerServlet" method="POST">
-        <div class="m3-field-group">
-          <span class="material-icons-outlined field-icon">person_add</span>
-          <input type="text" name="username" id="username" required placeholder=" " class="glass-input" />
-          <label for="username">用户名 (3-8位字母开头)</label>
+
+        <div class="reg-field-container">
+          <div class="m3-field-group">
+            <span class="material-icons-outlined field-icon">account_circle</span>
+            <input type="text" name="username" id="username" required placeholder=" " autocomplete="off" class="glass-input" />
+            <label for="username">用户名 (3-8位字母开头)</label>
+          </div>
           <span id="err-username" class="err-tip"></span>
         </div>
-        <div class="m3-field-group">
-          <span class="material-icons-outlined field-icon">lock</span>
-          <input type="password" name="password" id="password" required placeholder=" " class="glass-input" />
-          <label for="password">密码 (6-18位)</label>
+
+        <div class="reg-field-container">
+          <div class="m3-field-group">
+            <span class="material-icons-outlined field-icon">lock</span>
+            <input type="password" name="password" required placeholder=" " class="glass-input" />
+            <label for="password">初始密码 (6-18位)</label>
+          </div>
           <span id="err-pwd" class="err-tip"></span>
         </div>
-        <div class="m3-field-group">
-          <span class="material-icons-outlined field-icon">lock</span>
-          <input type="password" name="repassword" id="repassword" required placeholder=" " class="glass-input" />
-          <label for="repassword">确认密码</label>
+
+        <div class="reg-field-container">
+          <div class="m3-field-group">
+            <span class="material-icons-outlined field-icon">gpp_good</span>
+            <input type="password" name="repassword" id="repassword" required placeholder=" " class="glass-input" />
+            <label for="repassword">请再次输入密码以确认</label>
+          </div>
           <span id="err-repwd" class="err-tip"></span>
         </div>
 
         <button type="submit" class="btn-m3-glass">
-          <span class="btn-text">注 册</span>
+          <span class="btn-text">立即注册</span>
           <div class="btn-shine"></div>
         </button>
       </form>
 
-      <div class="m3-action-links">
-        <a href="javascript:void(0)" onclick="smoothNavigate('login.html')" class="glass-link highlight">← 返回登录</a>
+      <div class="m3-action-links" style="justify-content: center;">
+        <a href="javascript:void(0)" onclick="smoothNavigate('login.html')" class="glass-link">← 返回系统登录</a>
       </div>
 
       <p class="m3-copyright">© 2026 枣庄学院 · 仓储物联中心</p>
@@ -64,6 +73,5 @@
 
   <script src="js/xhr.js"></script>
   <script src="js/register.js"></script>
-  <script src="js/login.js"></script>
 </body>
 </html>
