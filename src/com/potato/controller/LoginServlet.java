@@ -21,31 +21,31 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 关键：告诉前端我们返回的是 JSON 格式数据
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
 
         String username = req.getParameter("username");
         String pwd = req.getParameter("pwd");
 
-        UserService userService = new UserServiceImpl();
-        User u = userService.login(username, pwd);
+        try {
+            UserService userService = new UserServiceImpl();
+            User u = userService.login(username, pwd);
 
-        if (u == null) {
-            // 登录失败，返回 JSON 布尔值 false
+            if (u == null) {
+                out.println(JSON.toJSONString(false));
+            } else {
+                HttpSession session = req.getSession();
+                List<Goods> goods = new UpdateInformation().findGoodsByid(u.getId());
+                List<Client> client = new UpdateInformation().findClientByid(u.getId());
+                session.setAttribute("u", u);
+                session.setAttribute("client", client);
+                session.setAttribute("goods", goods);
+                out.println(JSON.toJSONString(true));
+            }
+        } catch (RuntimeException e) {
+            // 数据库异常：记录日志，返回 false，不让前端感知具体错误
+            e.printStackTrace();
             out.println(JSON.toJSONString(false));
-        } else {
-            // 登录成功，将信息存入 Session
-            HttpSession session = req.getSession();
-            List<Goods> goods = new UpdateInformation().findGoodsByid(u.getId());
-            List<Client> client = new UpdateInformation().findClientByid(u.getId());
-
-            session.setAttribute("u", u);
-            session.setAttribute("client", client);
-            session.setAttribute("goods", goods);
-
-            // 返回 JSON 布尔值 true
-            out.println(JSON.toJSONString(true));
         }
     }
 }

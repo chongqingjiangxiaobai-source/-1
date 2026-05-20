@@ -6,18 +6,11 @@ import com.potato.entity.User;
 import java.sql.*;
 
 /**
- * @Author potato
- * @Description 用户表接口实现类，操作数据库
- * @Date 2022-12-05 21:45
+ * 用户表接口实现类，操作数据库
  */
-
 public class UserDaoImpl implements UserDao {
 
-    /**
-     * 注册
-     * @param u 用户对象
-     * @return 是否成功
-     */
+    /** 注册 */
     @Override
     public boolean save(User u) {
         Connection conn = null;
@@ -29,22 +22,14 @@ public class UserDaoImpl implements UserDao {
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());
             return ps.executeUpdate() > 0;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during save: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, null);
         }
-        return false;
     }
 
-    /**
-     * 登录
-     * @param username 用户名
-     * @param password 密码
-     * @return 用户对象或null
-     */
+    /** 登录：PreparedStatement 防注入，明文比对密码（生产环境应改为加盐哈希） */
     @Override
     public User login(String username, String password) {
         Connection conn = null;
@@ -63,21 +48,15 @@ public class UserDaoImpl implements UserDao {
                 u.setGender(rs.getString("gender"));
                 return u;
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return null; // 用户名或密码错误
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during login: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, rs);
         }
-        return null;
     }
 
-    /**
-     * 根据用户名判断是否被注册
-     * @param username 用户名
-     * @return 用户对象或null
-     */
+    /** 根据用户名判断是否被注册 */
     @Override
     public User findByUsername(String username) {
         Connection conn = null;
@@ -95,22 +74,15 @@ public class UserDaoImpl implements UserDao {
                 u.setGender(rs.getString("gender"));
                 return u;
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during findByUsername: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, rs);
         }
-        return null;
     }
 
-    /**
-     * 修改密码
-     * @param username 用户名
-     * @param password 新密码
-     * @return 是否成功
-     */
+    /** 修改密码 */
     @Override
     public boolean rePwd(String username, String password) {
         Connection conn = null;
@@ -122,21 +94,14 @@ public class UserDaoImpl implements UserDao {
             ps.setString(1, password);
             ps.setString(2, username);
             return ps.executeUpdate() > 0;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during rePwd: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, null);
         }
-        return false;
     }
 
-    /**
-     * 查询管理员信息
-     * @param id 用户ID
-     * @return 用户对象或null
-     */
+    /** 查询管理员信息 */
     @Override
     public User select1(int id) {
         Connection conn = null;
@@ -151,21 +116,15 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()) {
                 return rsToUser(rs);
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during select1: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
-    /**
-     * 根据用户名查询管理员信息
-     * @param name 用户名
-     * @return 用户对象或null
-     */
+    /** 根据用户名查询管理员信息 */
     @Override
     public User select2(String name) {
         Connection conn = null;
@@ -180,21 +139,14 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()) {
                 return rsToUser(rs);
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Database error during select2: " + e.getMessage(), e);
         } finally {
             DBUtils.close(conn, ps, rs);
         }
         return null;
     }
 
-    /**
-     * 封装结果集 -> 解析为具体的Java对象
-     * @param rs 结果集
-     * @return 用户对象
-     */
     private User rsToUser(ResultSet rs) throws SQLException {
         User s = new User();
         s.setId(rs.getInt("id"));
