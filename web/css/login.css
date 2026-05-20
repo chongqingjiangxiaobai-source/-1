@@ -1,133 +1,161 @@
-* {
-    margin: 0;
-    padding: 0;
+/* ==========================================================================
+   谷歌 M3 与 液态玻璃态核心变量规范
+   ========================================================================== */
+:root {
+  --font-m3: 'Plus Jakarta Sans', 'PingFang SC', sans-serif;
+  --g-blue: rgba(26, 115, 232, 0.65);
+  --g-red: rgba(234, 67, 53, 0.55);
+  --g-yellow: rgba(251, 188, 5, 0.5);
+  --g-green: rgba(52, 168, 83, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --text-primary: #1c1b1f;
+  --text-secondary: #49454f;
+  --m3-primary: #005faf;
+  --m3-error: #ba1a1a;
+  --bezier-m3: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-body {
-    background: #0CE093;
-    overflow: hidden;
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-m3); -webkit-font-smoothing: antialiased; }
+
+body.m3-liquid-body {
+  background: #f4f5fa;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
 }
 
-.wrap {
-    z-index: 10;
-    position: absolute;
-    width: 360px;
-    height: 600px;
-    top: 50%;
-    left: 50%;
-    margin: -300px 0 0 -180px;
+/* ── 液态光影气泡 ── */
+.liquid-canvas {
+  position: fixed; width: 100vw; height: 100vh;
+  top: 0; left: 0; z-index: 1;
+  overflow: hidden;
+  filter: blur(50px);
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  animation: liquid-morph 12s var(--bezier-m3) infinite alternate, liquid-float 20s linear infinite;
+}
+.blob-google-blue { width: 500px; height: 500px; background: var(--g-blue); top: -10%; left: 10%; animation-delay: 0s; }
+.blob-google-red  { width: 450px; height: 450px; background: var(--g-red);  bottom: -5%; right: 15%; animation-delay: -3s; }
+.blob-google-yellow{ width: 400px; height: 400px; background: var(--g-yellow); top: 30%; right: -5%; animation-delay: -6s; }
+.blob-google-green { width: 350px; height: 350px; background: var(--g-green); bottom: 20%; left: -5%; animation-delay: -9s; }
+
+@keyframes liquid-morph {
+  0%   { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: scale(0.9) rotate(0deg); }
+  50%  { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; transform: scale(1.1) rotate(90deg); }
+  100% { border-radius: 48% 52% 30% 70% / 40% 60% 40% 60%; transform: scale(1.0) rotate(180deg); }
+}
+@keyframes liquid-float {
+  0%   { transform: translate(0, 0); }
+  50%  { transform: translate(60px, 40px); }
+  100% { transform: translate(0, 0); }
 }
 
-.wrap > h1 {
-    text-align: center;
-    font-size: 1.5em;
+/* ── 页面切换动效 ── */
+.page-transition-wrapper {
+  position: relative; z-index: 10;
+  opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(10px);
+  animation: page-enter 0.75s var(--bezier-m3) forwards;
+}
+@keyframes page-enter {
+  to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.page-transition-wrapper.exit-active { animation: page-exit 0.5s var(--bezier-m3) forwards; }
+@keyframes page-exit {
+  to { opacity: 0; transform: scale(0.9) translateY(-30px); filter: blur(15px); }
 }
 
-.login {
-    width: 360px;
-    height: 500px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    position: relative;
-    z-index: 10;
+/* ── 玻璃拟态卡片 ── */
+.glass-login-card {
+  width: 440px; padding: 48px 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(35px) saturate(190%);
+  -webkit-backdrop-filter: blur(35px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.03), inset 0 1px 1px rgba(255,255,255,0.5), 0 24px 64px rgba(0,0,0,0.06);
+  transition: box-shadow 0.4s var(--bezier-m3);
+}
+.glass-login-card:hover {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05), inset 0 1px 2px rgba(255,255,255,0.7), 0 32px 80px rgba(0,0,0,0.10);
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60%  { transform: translateX(-6px); }
+  40%, 80%  { transform: translateX(6px); }
 }
 
-.login > h3 {
-    text-align: center;
-    font-size: 20px;
-    padding-top: 20px;
+/* ── 品牌区 ── */
+.brand-area { text-align: center; margin-bottom: 40px; }
+.m3-logo-glow {
+  display: inline-flex; background: rgba(255,255,255,0.7); color: var(--m3-primary);
+  padding: 14px; border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(26,115,232,0.15); margin-bottom: 16px;
 }
+.m3-logo-glow .logo-icon { font-size: 36px; }
+.brand-area h2 { font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
+.brand-area p { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1.5px; margin-top: 4px; }
 
-.title-line {
-    width: 50px;
-    height: 3px;
-    background: #0CE093;
-    margin: 10px auto;
+/* ── 输入框组 ── */
+.m3-field-group { position: relative; margin-bottom: 24px; display: flex; align-items: center; }
+.m3-field-group .field-icon {
+  position: absolute; left: 16px; color: var(--text-secondary);
+  transition: color 0.3s; pointer-events: none; font-size: 20px;
 }
+.glass-input {
+  width: 100%; padding: 22px 16px 6px 48px; font-size: 16px;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; outline: none;
+  transition: all 0.3s var(--bezier-m3);
+}
+.glass-input:hover { background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.12); }
+.m3-field-group label {
+  position: absolute; left: 48px; top: 50%; transform: translateY(-50%);
+  color: var(--text-secondary); font-size: 15px; pointer-events: none;
+  transition: all 0.3s var(--bezier-m3);
+}
+.glass-input:focus ~ label, .glass-input:not(:placeholder-shown) ~ label {
+  top: 12px; left: 48px; font-size: 11px; font-weight: 700; color: var(--m3-primary);
+}
+.glass-input:focus { background: rgba(255,255,255,0.6); border-color: var(--m3-primary); box-shadow: 0 0 0 3px rgba(0,95,175,0.12); }
+.glass-input:focus ~ .field-icon { color: var(--m3-primary); }
 
-.logo {
-    text-align: center;
-    margin: 20px 0;
-}
+/* ── 错误提示 ── */
+.error-tip-container { min-height: 20px; margin: -12px 0 20px 4px; }
+#err-login { font-size: 13px; font-weight: 500; color: var(--m3-error); }
 
-.login-form {
-    padding: 0 30px;
+/* ── 胶囊按钮 ── */
+.btn-m3-glass {
+  position: relative; width: 100%; height: 52px;
+  background: var(--m3-primary); color: #fff; border: none;
+  border-radius: 100px; font-size: 16px; font-weight: 600;
+  cursor: pointer; overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,95,175,0.25);
+  transition: all 0.3s var(--bezier-m3);
 }
+.btn-m3-glass:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,95,175,0.35); background: #004b8c; }
+.btn-m3-glass:active { transform: translateY(1px) scale(0.98); }
+.btn-shine {
+  position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-25deg); transition: none;
+}
+.btn-m3-glass:hover .btn-shine { left: 150%; transition: left 0.65s ease-in-out; }
 
-.input-gorup {
-    position: relative;
-    margin-bottom: 20px;
-}
+/* ── 底部链接 ── */
+.m3-action-links { display: flex; justify-content: space-between; margin-top: 32px; }
+.glass-link { font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+.glass-link:hover { color: var(--text-primary); }
+.glass-link.highlight { color: var(--m3-primary); font-weight: 600; }
+.glass-link.highlight:hover { text-decoration: underline; }
+.m3-copyright { text-align: center; font-size: 11px; color: var(--text-secondary); margin-top: 40px; opacity: 0.6; }
 
-.input-gorup .icon {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    color: #888;
-}
-
-.input-gorup .input-txt {
-    width: 100%;
-    height: 40px;
-    padding: 0 10px 0 35px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.input-gorup .input-txt:focus {
-    outline: none;
-    border-color: #0CE093;
-}
-
-#err-login {
-    display: block;
-    color: red;
-    font-size: 12px;
-    text-align: center;
-    height: 20px;
-}
-
-.btn-login {
-    width: 100%;
-    height: 40px;
-    background: #0CE093;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-login:hover {
-    background: #0ab98a;
-}
-
-.account-link {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.account-link > a {
-    color: #0CE093;
-    text-decoration: none;
-    font-size: 12px;
-    margin: 0 10px;
-}
-
-.copyright {
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    margin-top: 40px;
-}
-
-#gravity-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
+/* ── 注册页错误提示 ── */
+.err-tip { display: block; font-size: 11px; text-align: left; padding-left: 48px; height: 16px; color: var(--m3-error); font-weight: 500; }
