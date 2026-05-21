@@ -87,7 +87,7 @@ warehouse-management-system/
 
 ## 快速开始
 
-### 方式一：Docker 部署（推荐）
+### 方式一：Docker 部署（推荐）（但机房电脑没有安装Docker故废弃）
 
 #### 环境要求
 - Docker 20.10+
