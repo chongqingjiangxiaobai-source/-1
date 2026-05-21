@@ -1,0 +1,10 @@
+# Docker build context - exclude compiled artifacts
+# Keep source structure, build uses pre-compiled /opt/tomcat9/webapps/warehouse
+.git
+.gitee
+*.bak
+*.bak.*
+*.iml
+README.md
+build-docker.sh
+webapps/
