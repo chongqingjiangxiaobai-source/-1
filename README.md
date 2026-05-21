@@ -20,6 +20,7 @@
 | UI 风格 | 液态玻璃光影质感主题（Glassmorphism） |
 | 数据库 | MySQL |
 | 服务器 | Tomcat 9 |
+| 容器化 | Docker / Docker Compose |
 
 ## 项目结构
 
@@ -33,15 +34,17 @@ warehouse-management-system/
 │       ├── filter/         # 过滤器（字符编码）
 │       ├── service/        # 业务逻辑层
 │       └── util/           # 工具类
-├── web/
-│   ├── WEB-INF/          # Web 配置
-│   ├── css/              # 样式文件（液态玻璃主题）
-│   ├── js/               # 前端 JavaScript
-│   ├── img/              # 图片资源
-│   ├── bootstrap/        # Bootstrap 框架
-│   ├── layer/            # 弹窗插件
-│   └── *.jsp/html        # 页面文件
-└── pom.xml               # Maven 配置
+├── web/                  # Web 资源（IDE 开发时使用）
+├── webapps/
+│   └── warehouse/        # 已编译部署版本（含 class + lib）
+├── docker/
+│   ├── jdbc.properties   # Docker 环境专用配置
+│   └── sql/
+│       └── init.sql      # MySQL 数据库初始化脚本
+├── Dockerfile            # Web 应用镜像构建
+├── docker-compose.yml    # 容器编排配置
+├── build-docker.sh       # 一键构建脚本
+└── .dockerignore         # Docker 构建排除
 ```
 
 ## 功能模块
@@ -76,25 +79,76 @@ warehouse-management-system/
 
 > ⚠️ **提示**：将下方链接中的 `<YOUR_HOST>` 和 `<PORT>` 替换为你的服务器地址和端口
 
+| 环境 | 传统部署地址 | Docker 部署地址 |
+|------|-------------|----------------|
+| 登录页 | `http://<HOST>:<PORT>/warehouse/login.html` | `http://<HOST>:<PORT>/login.html` |
+| 注册页 | `http://<HOST>:<PORT>/warehouse/reg.html` | `http://<HOST>:<PORT>/reg.html` |
+| 首页 | `http://<HOST>:<PORT>/warehouse/home_page.jsp` | `http://<HOST>:<PORT>/home_page.jsp` |
+
+## 快速开始
+
+### 方式一：Docker 部署（推荐）
+
+#### 环境要求
+- Docker 20.10+
+- Docker Compose 2.0+
+
+#### 一键启动
+
+```bash
+cd warehouse-management-system
+./build-docker.sh
+```
+
+或手动构建：
+
+```bash
+docker-compose up -d --build
+```
+
+#### 访问地址
+
 | 环境 | 地址 |
 |------|------|
-| 主站 | `http://<YOUR_HOST>:<PORT>/warehouse/login.html` |
-| 注册页 | `http://<YOUR_HOST>:<PORT>/warehouse/reg.html` |
-| 首页 | `http://<YOUR_HOST>:<PORT>/warehouse/home_page.jsp` |
+| 登录页 | http://localhost:8080/warehouse/login.html |
+| 注册页 | http://localhost:8080/warehouse/reg.html |
+| 首页 | http://localhost:8080/warehouse/home_page.jsp |
 
-### 示例（假设部署在本地 8080 端口）
+> ⚠️ 若宿主机 8080 端口被占用，docker-compose 会自动使用 8081 端口
+
+#### 常用操作
+
+```bash
+# 查看容器状态
+docker-compose ps
+
+# 查看应用日志
+docker logs warehouse_web -f
+
+# 重新构建（代码更新后）
+docker-compose up -d --build
+
+# 停止并删除容器
+docker-compose down
+
+# 完全重置（清除数据）
+docker-compose down -v
 ```
-http://localhost:8080/warehouse/login.html
-```
 
-### 快速开始
+#### 数据持久化
 
-#### 1. 环境要求
+MySQL 数据存储在 Docker volume 中，删除容器不会丢失数据。
+
+---
+
+### 方式二：传统部署（Tomcat + MySQL）
+
+#### 环境要求
 - JDK 8+
 - MySQL 5.7+
 - Tomcat 9+
 
-#### 2. 数据库配置
+#### 数据库配置
 
 ```sql
 CREATE DATABASE warehouse DEFAULT CHARACTER SET utf8mb4;
@@ -132,7 +186,7 @@ CREATE TABLE goods_id (
 );
 ```
 
-#### 3. 数据库连接配置
+#### 数据库连接配置
 
 编辑 `src/com/potato/util/jdbc.properties`：
 ```properties
@@ -142,7 +196,9 @@ url=jdbc:mysql://localhost:3306/warehouse?serverTimezone=Asia/Shanghai
 driverName=com.mysql.cj.jdbc.Driver
 ```
 
-#### 4. 部署运行
+> ⚠️ **Docker 部署时**请使用 `docker/jdbc.properties`，host 已配置为 `mysql` 或宿主机 IP
+
+#### 部署运行
 
 **方式一：IDE 部署**
 1. 将项目导入 IntelliJ IDEA / Eclipse
@@ -150,11 +206,13 @@ driverName=com.mysql.cj.jdbc.Driver
 3. 运行并访问 `http://localhost:8080/warehouse/`
 
 **方式二：WAR 包部署**
-1. 使用 Maven 打包：`mvn clean package`
-2. 将生成的 WAR 包复制到 Tomcat webapps 目录
-3. 重启 Tomcat 访问
+1. 将已编译的 `webapps/warehouse/` 目录复制到 Tomcat webapps 目录
+2. 重启 Tomcat 访问
 
-#### 5. 首次使用
+**方式三：Docker 部署**
+见上方「方式一：Docker 部署」
+
+#### 首次使用
 
 1. 访问注册页面创建管理员账号
 2. 注册完成后自动跳转登录页
@@ -198,6 +256,7 @@ driverName=com.mysql.cj.jdbc.Driver
 - ✅ **表单验证**：前端 JS 实时校验 + 后端验证双重保障
 - ✅ **UI 主题**：液态玻璃光影质感，全端风格统一
 - ✅ **实时搜索**：前端 JS 过滤，无需刷新页面
+- ✅ **容器化部署**：支持 Docker / Docker Compose 一键部署
 
 ## License
 
