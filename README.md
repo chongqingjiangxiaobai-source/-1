@@ -68,7 +68,7 @@ warehouse-management-system/
 
 ## 数据库 ER 图
 
-![ER Diagram](er-diagram.png)
+
 
 ## 界面预览
 
