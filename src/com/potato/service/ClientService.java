@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author potato
  * @PackageName:com.potato.service
- * @Description: TODO 定义客户业务层接口
+ * @Description: 定义客户业务层接口
  * @Date 2022-12-10 22:22
  */
 public interface ClientService {

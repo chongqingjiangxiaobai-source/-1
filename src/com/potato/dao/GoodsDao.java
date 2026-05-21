@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @Author potato
  * @PackageName:com.potato.dao
- * @Description: TODO 货物接口
+ * @Description: 货物接口
  * @Date 2022-12-05 21:55
  */
 

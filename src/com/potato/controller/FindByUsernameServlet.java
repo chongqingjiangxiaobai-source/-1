@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * @Author potato
  * @PackageName:com.potato.controller
- * @Description: TODO 判断是否注册
+ * @Description: 判断是否注册
  * @Date 2022-12-04 13:42
  */
 

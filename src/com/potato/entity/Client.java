@@ -3,7 +3,7 @@ package com.potato.entity;
 /**
  * @Author potato
  * @PackageName:com.potato.entity
- * @Description:  TODO 客户
+ * @Description:客户
  * @Date 2022-12-10 21:27
  */
 

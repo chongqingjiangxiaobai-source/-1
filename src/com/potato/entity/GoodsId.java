@@ -3,7 +3,7 @@ package com.potato.entity;
 /**
  * @Author potato
  * @PackageName:com.potato.entity
- * @Description:  TODO  管理员Id对应的货物ID (一个管理员ID可以对应多个货物ID)
+ * @Description: 管理员Id对应的货物ID (一个管理员ID可以对应多个货物ID)
  * @Date 2022-12-04 11:53
  */
 

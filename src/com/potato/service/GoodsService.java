@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author potato
  * @PackageName:com.potato.service
- * @Description: TODO  定义货物业务层接口
+ * @Description: 定义货物业务层接口
  * @Date 2022-12-04 12:53
  */
 

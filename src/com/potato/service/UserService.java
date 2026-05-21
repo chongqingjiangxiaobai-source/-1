@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @Author potato
  * @PackageName:com.potato.service
- * @Description: TODO 定义用户业务层接口
+ * @Description: 定义用户业务层接口
  * @Date 2022-12-04 12:53
  */
 public interface UserService {

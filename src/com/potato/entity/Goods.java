@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * @Author potato
  * @PackageName:com.potato.entity
- * @Description: TODO 货物信息
+ * @Description: 货物信息
  * @Date 2022-12-04 11:52
  */
 

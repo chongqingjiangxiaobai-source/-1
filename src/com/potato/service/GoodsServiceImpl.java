@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @Author potato
  * @PackageName:com.potato.service
- * @Description: TODO  货物业务层
+ * @Description: 货物业务层
  * @Date 2022-12-04 12:53
  */
 

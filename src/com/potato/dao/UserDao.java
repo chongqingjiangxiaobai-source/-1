@@ -5,7 +5,7 @@ import com.potato.entity.User;
 /**
  * @Author potato
  * @PackageName:com.potato.dao
- * @Description: TODO 用户表接口
+ * @Description: 用户表接口
  * @Date 2022-12-05 21:45
  */
 

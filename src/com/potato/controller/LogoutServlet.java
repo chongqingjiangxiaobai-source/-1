@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @Author potato
  * @PackageName:com.potato.controller
- * @Description: TODO  退出登录(清空会话)
+ * @Description: 退出登录(清空会话)
  * @Date 2022-12-04 16:15
  */
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @Author potato
  * @PackageName:com.potato.controller
- * @Description: TODO 修改货物信息
+ * @Description: 修改货物信息
  * @Date 2022-12-05 12:17
  */
 @WebServlet("/modifyGoodsServlet")

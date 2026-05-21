@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * @Author potato
  * @PackageName:com.potato.controller
- * @Description: TODO  添加货物信息
+ * @Description: 添加货物信息
  * @Date 2022-12-04 16:18
  */
 
