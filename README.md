@@ -77,12 +77,12 @@ warehouse-management-system/
 
 ## 在线演示
 
-> ⚠️ **提示**：将下方链接中的 `<YOUR_HOST>` 和 `<PORT>` 替换为你的服务器地址和端口
+> ⚠️ 不要开源，以防暴露服务器ip和端口号
 
 | 环境 | 传统部署地址 | Docker 部署地址 |
 |------|-------------|----------------|
-| 登录页 | `http://<HOST>:<PORT>/warehouse/login.html` | `http://<HOST>:<PORT>/login.html` |
-| 注册页 | `http://<HOST>:<PORT>/warehouse/reg.html` | `http://<HOST>:<PORT>/reg.html` |
+| 登录页 | `[http://<HOST>:<PORT>/warehouse/login.html](http://123.207.205.179:3000/warehouse/login.html)` | `http://<HOST>:<PORT>/login.html` |
+| 注册页 | `[http://<HOST>:<PORT>/warehouse/reg.html](http://123.207.205.179:3000/warehouse/reg.html)` | `http://<HOST>:<PORT>/reg.html` |
 | 首页 | `http://<HOST>:<PORT>/warehouse/home_page.jsp` | `http://<HOST>:<PORT>/home_page.jsp` |
 
 ## 快速开始
@@ -228,7 +228,7 @@ driverName=com.mysql.cj.jdbc.Driver
 | 仓库列表 | `goods_list.jsp` | 货物管理页面，含实时搜索引擎 |
 | 添加货物 | `add_goods.jsp` | 新增货物 |
 | 修改货物 | `modify.jsp` | 编辑货物信息 |
-| 客户管理 | `client.jsp` | 客户信息管理 |
+| 客户管理 | `client.jsp` | 客户信息管理（人手不够，功能写死以后再说） |
 | 个人信息 | `personal_information.jsp` | 管理员信息 |
 | 修改密码 | `change_password.jsp` | 修改登录密码 |
 
@@ -254,7 +254,7 @@ driverName=com.mysql.cj.jdbc.Driver
 - ✅ **配置分离**：数据库配置外部化，易于部署
 - ✅ **前后端分离**：AJAX + JSON 实现无刷新交互
 - ✅ **表单验证**：前端 JS 实时校验 + 后端验证双重保障
-- ✅ **UI 主题**：液态玻璃光影质感，全端风格统一
+- ✅ **UI 主题**：液态玻璃光影质感，全端风格统一（伪-只做了登录页，后面太难捣鼓没做）
 - ✅ **实时搜索**：前端 JS 过滤，无需刷新页面
 - ✅ **容器化部署**：支持 Docker / Docker Compose 一键部署
 
