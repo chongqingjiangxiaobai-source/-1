@@ -66,7 +66,7 @@ warehouse-management-system/
 - 修改客户信息
 - 删除客户信息
 
-## 数据库 ER 图
+## 数据库 ER 图  没画往img里丢了张截图引用的，老是对不齐
 
 ![输入图片说明](web/img/image.png)
 
