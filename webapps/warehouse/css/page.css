@@ -1,0 +1,7 @@
+/* page.css - content pages */
+body.content-body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}

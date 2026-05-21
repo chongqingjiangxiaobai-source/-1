@@ -66,9 +66,29 @@ warehouse-management-system/
 - 修改客户信息
 - 删除客户信息
 
-## 数据库 ER 图  没画往img里丢了张截图引用的，老是对不齐
+## 数据库 ER 图
 
-![输入图片说明](web/img/image.png)
+```
+┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+│    user     │       │   goods     │       │   client    │
+│  用户表      │       │  货物表      │       │  客户表      │
+├─────────────┤       ├─────────────┤       ├─────────────┤
+│ id (PK)     │       │ id (PK)     │       │ clientId(PK)│
+│ username    │       │ name        │       │ name        │
+│ password   │       │ num         │       │ gender      │
+│ age         │       │ site        │       │ age         │
+│ gender      │       │ time        │       │ goodsId (FK)│
+└──────┬──────┘       └──────┬──────┘       │ goodsNum    │
+       │                     │              └──────┬──────┘
+       │    ┌─────────────┐  │                     │
+       └────┤  goods_id   │──┘                     │
+            │  关联表       │                       │
+            ├─────────────┤                        │
+            │ uid (FK→user)│                        │
+            │ id (FK→goods)│                        │
+            │ clientId(FK)│────────────────────────┘
+            └─────────────┘
+```
 
 **关系说明：**
 - `user` ↔ `goods_id`：**1:N**（一个用户可关联多条货物记录）
@@ -105,7 +125,7 @@ warehouse-management-system/
 
 ## 快速开始
 
-### 方式一：Docker 部署（推荐）（但机房电脑没有安装Docker故废弃）
+### 方式一：Docker 部署（推荐）
 
 #### 环境要求
 - Docker 20.10+
