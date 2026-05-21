@@ -66,6 +66,10 @@ warehouse-management-system/
 - 修改客户信息
 - 删除客户信息
 
+## 数据库 ER 图
+
+![ER Diagram](er-diagram.png)
+
 ## 界面预览
 
 系统采用**液态玻璃光影质感主题**，设计特点：
