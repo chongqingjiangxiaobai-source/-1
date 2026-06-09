@@ -36,7 +36,7 @@ public class UpdateClientServlet extends HttpServlet {
 
         // 修改之后更新session
         new UpdateInformation().UpdateClientSession(req);
-        resp.sendRedirect("/client.jsp");
+        resp.sendRedirect(req.getContextPath() + "/client.jsp");
 
     }
 

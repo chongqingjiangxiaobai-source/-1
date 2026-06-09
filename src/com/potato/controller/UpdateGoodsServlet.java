@@ -33,7 +33,7 @@ public class UpdateGoodsServlet extends HttpServlet {
 
         // 修改之后更新session
         new UpdateInformation().UpdateGoodsSession(req);
-        resp.sendRedirect("/goods_list.jsp");
+        resp.sendRedirect(req.getContextPath() + "/goods_list.jsp");
 
     }
 

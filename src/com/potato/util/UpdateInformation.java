@@ -53,12 +53,10 @@ public class UpdateInformation {
      * 更新Client的session
      */
     public void UpdateClientSession(HttpServletRequest req){
-        Integer uid=Integer.parseInt(req.getParameter("uid"));
-        UserService userService=new UserServiceImpl();
         HttpSession session=req.getSession();
-        User u= userService.select1(uid);
+        User u=(User)session.getAttribute("u");
+        if(u==null) return;
         List<Client> client= new UpdateInformation().findClientByid(u.getId());
-        session.setAttribute("u",u);
         session.setAttribute("client",client);
     }
 
@@ -68,12 +66,10 @@ public class UpdateInformation {
      * @param req
      */
     public void UpdateGoodsSession(HttpServletRequest req){
-        Integer uid=Integer.parseInt(req.getParameter("uid"));
-        UserService userService=new UserServiceImpl();
         HttpSession session=req.getSession();
-        User u= userService.select1(uid);
+        User u=(User)session.getAttribute("u");
+        if(u==null) return;
         List<Goods> goods=new UpdateInformation().findGoodsByid(u.getId());
-        session.setAttribute("u",u);
         session.setAttribute("goods",goods);
     }
 }

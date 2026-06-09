@@ -12,7 +12,7 @@ RUN rm -rf $CATALINA_HOME/webapps/ROOT
 COPY webapps/warehouse/ $CATALINA_HOME/webapps/ROOT/
 
 # 复制 Docker 环境专用 JDBC 配置（host 指向宿主机 IP）
-COPY docker/jdbc.properties $CATALINA_HOME/webapps/ROOT/WEB-INF/classes/jdbc.properties
+COPY docker/jdbc.properties $CATALINA_HOME/webapps/ROOT/WEB-INF/classes/com/potato/util/jdbc.properties
 
 EXPOSE 8080
 

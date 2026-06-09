@@ -35,8 +35,7 @@ public class DeleteClientServlet extends HttpServlet {
 
         // 删除之后更新session
         new UpdateInformation().UpdateClientSession(req);
-        // 重定向
-        resp.sendRedirect("/client.jsp");
+        resp.sendRedirect(req.getContextPath() + "/client.jsp");
 
 
     }
