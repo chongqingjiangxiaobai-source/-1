@@ -2,6 +2,9 @@
 
 📦 基于 JavaWeb 的仓库管理系统，支持货物管理、客户管理、用户权限等完整功能。
 
+GITHUB :squirrel: 
+https://github.com/chongqingjiangxiaobai-source/-1
+
 ## 项目简介
 
 本系统采用 Java Servlet + JSP + MySQL 技术栈开发，提供完整的仓库管理功能，包括：
@@ -119,8 +122,8 @@ warehouse-management-system/
 
 | 环境 | 传统部署地址 | Docker 部署地址 |
 |------|-------------|----------------|
-| [登录页](http://123.207.205.179:3000/warehouse/login.html) | `[http://<HOST>:<PORT>/warehouse/login.html]` | `http://<HOST>:<PORT>/login.html` |
-| [注册页](http://123.207.205.179:3000/warehouse/reg.html) | `[http://<HOST>:<PORT>/warehouse/reg.html]` | `http://<HOST>:<PORT>/reg.html` |
+| [登录页](http://www.jxb.red:3000/warehouse/login.html) | `[http://<HOST>:<PORT>/warehouse/login.html]` | `http://<HOST>:<PORT>/login.html` |
+| [注册页]| `[http://<HOST>:<PORT>/warehouse/reg.html]` | `http://<HOST>:<PORT>/reg.html` |
 | 首页 | `http://<HOST>:<PORT>/warehouse/home_page.jsp` | `http://<HOST>:<PORT>/home_page.jsp` |
 
 ## 快速开始
