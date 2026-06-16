@@ -299,6 +299,15 @@ driverName=com.mysql.cj.jdbc.Driver
 - ✅ **实时搜索**：前端 JS 过滤，无需刷新页面
 - ✅ **容器化部署**：支持 Docker / Docker Compose 一键部署
 
+## 项目贡献者
+
+感谢以下同学对本项目的贡献：
+
+| 姓名 | 角色 |
+|------|------|
+| 江小白 (jxb) | 项目负责人 / 开发者 |
+| 赵瑞 | 贡献者 |
+
 ## License
 
 MIT License © 2026 枣庄学院
