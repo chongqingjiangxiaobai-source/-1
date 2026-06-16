@@ -307,6 +307,7 @@ driverName=com.mysql.cj.jdbc.Driver
 |------|------|
 | 江小白 (jxb) | 项目负责人 / 开发者 |
 | 赵瑞 | 贡献者 |
+| 孙茂原 | 贡献者 |
 
 ## License
 
